@@ -13,8 +13,10 @@ import io.vertx.ext.web.RoutingContext;
 import org.apache.log4j.Logger;
 import sun.security.action.PutAllAction;
 import tool.DButil;
+import tool.SignalingToken;
 
 import java.math.BigDecimal;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,6 +62,20 @@ public class CommonRest {
         });
     }
 
+    public void getToken(RoutingContext routingContext) {
+        HttpServerRequest request = routingContext.request();
+        String uid = request.getParam("uid");
+        try {
+            String token = SignalingToken.getToken("uid");
+
+            routingContext.response().putHeader("content-type", "application/json;charset=UTF-8")
+                    .end(Json.encodePrettily(new JsonObject().put("statusCode",200).put("token",token)));
+
+        } catch (NoSuchAlgorithmException e ) {
+            e.printStackTrace();
+        }
+    }
+
     public void getMessages(RoutingContext routeContext) {
         HttpServerRequest request = routeContext.request();
         String pageNum = request.getParam("pageNum");
@@ -85,7 +101,7 @@ public class CommonRest {
                     connection.querySingle("select count(*) from im_message where mix_id = '"+mixId+"'",queryHandler ->{
                         JsonArray jsonCount = queryHandler.result();
                         Integer integer = jsonCount.getInteger(0);
-
+                        connection.close();
                         JsonObject rowsObj = new JsonObject().put("total",integer).put("rows",jsonRows);
 
 

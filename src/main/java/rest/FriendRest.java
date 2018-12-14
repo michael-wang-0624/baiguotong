@@ -2,6 +2,7 @@ package rest;
 
 import io.vertx.core.CompositeFuture;
 import io.vertx.core.Future;
+import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.json.Json;
@@ -39,6 +40,17 @@ public class FriendRest {
                 BusMessage m = (BusMessage) replyMessage.getResRep();
                 JsonObject ll = (JsonObject) m.getObj();
                 ll.put("statusCode", m.getCode());
+
+
+                JsonObject msg = new JsonObject();
+                msg.put("account",friendUid);
+                msg.put("message",new JsonObject().put("type","subscribe").put("uid",uid).put("body","请求添加好友"));
+
+                vertx.eventBus().send("subscribe",msg,handler->{
+                    if (handler.succeeded()) {
+                        logger.info("推送车工");
+                    }
+                });
 
 
                 routeContext.response().putHeader("content-type", "application/json;charset=UTF-8")

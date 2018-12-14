@@ -86,6 +86,8 @@ public class RestApiVertical extends AbstractVerticle {
         //获取聊天消息列表
         router.route(HttpMethod.GET,"/talkList").handler((new CommonRest(vertx)::talkList));
 
+        router.route(HttpMethod.GET,"/getToken").handler(new CommonRest(vertx)::getToken);
+
         httpServer.requestHandler(router::accept).listen(8081);
 
     }

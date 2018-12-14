@@ -69,6 +69,15 @@ public class MainVertical  {
             });
 
 
+            vertx.deployVerticle(SignalVertical.class.getName(),new DeploymentOptions().setWorker(true),re -> {
+                if(re.succeeded()) {
+                    System.out.println("success " + re.result());
+                } else  {
+                    System.out.println("failed " + re.cause());
+                }
+
+            });
+
 
 
 
