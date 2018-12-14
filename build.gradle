@@ -1,0 +1,55 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '1.2.3'
+}
+
+group 'cn.lianxian'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+}
+mainClassName = 'io.vertx.core.Launcher' //<--add
+def mainVerticleName  = 'vertical.MainVertical'
+shadowJar {
+    classifier = 'fat'
+    manifest {  //<--add
+        attributes "Main-Verticle": mainVerticleName
+    }
+    mergeServiceFiles {
+        include 'META-INF/services/io.vertx.core.spi.VerticleFactory'
+    }
+}
+
+
+task "create-dirs" << {
+    sourceSets*.java.srcDirs*.each {
+        it.mkdirs()
+    }
+    sourceSets*.resources.srcDirs*.each{
+        it.mkdirs()
+    }
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile 'io.vertx:vertx-core:3.5.4'
+    compile fileTree (dir: 'lib', include: ['*.jar'])
+    compile 'io.vertx:vertx-web:3.5.4'
+    compile 'io.vertx:vertx-redis-client:3.5.2.CR3'
+    compile 'io.vertx:vertx-mysql-postgresql-client:3.5.4'
+    compile 'org.slf4j:slf4j-api:1.7.12'
+    compile 'org.slf4j:slf4j-simple:1.7.12'
+    compile 'log4j:log4j:1.2.17'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.1.0'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.1.0'
+    compile 'com.fasterxml.jackson.core:jackson-annotations:2.1.0'
+    compile 'mysql:mysql-connector-java:5.1.33'
+    compile 'io.vertx:vertx-auth-jdbc:3.5.4'
+    compile 'io.vertx:vertx-rabbitmq-client:3.6.0'
+    compile 'com.rabbitmq:amqp-client:5.4.1'
+}
+
