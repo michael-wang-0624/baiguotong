@@ -1,13 +1,12 @@
 package vertical;
 
 import io.vertx.core.AbstractVerticle;
-import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServer;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.BodyHandler;
-import org.apache.log4j.Logger;
 import io.vertx.ext.web.handler.CorsHandler;
+import org.apache.log4j.Logger;
 import rest.CommonRest;
 import rest.FileRest;
 import rest.FriendRest;
@@ -48,20 +47,19 @@ public class RestApiVertical extends AbstractVerticle {
 
         router.route(HttpMethod.POST,"/uploadFile").handler(new FileRest(vertx)::uploadFile);
         //添加好友
-        router.route(HttpMethod.PUT,"/addFriends").handler(new FriendRest(vertx)::addFriend);
+        router.route(HttpMethod.POST,"/addFriends").handler(new FriendRest(vertx)::addFriend);
 
         //好友列表
         router.route(HttpMethod.GET,"/getFriendList").handler(new FriendRest(vertx)::getFriendList);
-
 
        //搜索好友
         router.route(HttpMethod.GET,"/searchFriend").handler(new FriendRest(vertx)::searchFriend);
 
         //删除好友
-        router.route(HttpMethod.DELETE,"/deleteFriend").handler(new FriendRest(vertx)::deleteFriend);
+        router.route(HttpMethod.POST,"/deleteFriend").handler(new FriendRest(vertx)::deleteFriend);
 
         //查看好友
-        router.route(HttpMethod.GET,"/getFriendDetail").handler(new FriendRest(vertx)::searchFriend);
+        router.route(HttpMethod.GET,"/getFriendDetail").handler(new FriendRest(vertx)::getFriendDetail);
 
         //修改好友备注
         router.route(HttpMethod.POST,"/updateMark").handler(new MarkRest(vertx)::updateMark);
@@ -72,10 +70,10 @@ public class RestApiVertical extends AbstractVerticle {
         router.route(HttpMethod.GET,"/getDetailMark").handler(new MarkRest(vertx)::getFriendMark);
 
         //设置语言
-        router.route(HttpMethod.POST,"/settingCountry").handler(new CommonRest(vertx)::setLanguage);
+        router.route(HttpMethod.POST,"/setLanguage").handler(new CommonRest(vertx)::setLanguage);
 
         //保存会话记录
-        router.route(HttpMethod.PUT,"/saveMessage").handler(new CommonRest(vertx)::saveMessage);
+        router.route(HttpMethod.POST,"/saveMessage").handler(new CommonRest(vertx)::saveMessage);
 
         //分页获取聊天记录
         router.route(HttpMethod.GET,"/getMessages").handler(new CommonRest(vertx)::getMessages);
@@ -88,7 +86,12 @@ public class RestApiVertical extends AbstractVerticle {
 
         router.route(HttpMethod.GET,"/getToken").handler(new CommonRest(vertx)::getToken);
 
+        router.route(HttpMethod.POST,"/replyRequest").handler(new FriendRest(vertx)::replyRequest);
+
+        router.route(HttpMethod.GET,"/getAddFriendList").handler(new FriendRest(vertx)::getAddFriendList);
+
         httpServer.requestHandler(router::accept).listen(8081);
+
 
     }
 

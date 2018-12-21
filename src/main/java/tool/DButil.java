@@ -6,7 +6,6 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.asyncsql.MySQLClient;
 import io.vertx.ext.sql.SQLClient;
-import sun.security.action.PutAllAction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,8 +48,6 @@ public class DButil{
 
 
 					client = MySQLClient.createShared(vertx,mySQLClientConfig,"mysqlPool");
-
-					//client = MySQLClient.createShared(vertx, mySQLClientConfig, "MySQLPool1");
 				}
 			}
 		}

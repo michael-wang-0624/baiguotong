@@ -11,18 +11,20 @@ import org.apache.log4j.Logger;
 import tool.DButil;
 import tool.RedisUtil;
 
-public class MainVertical  {
+public class MainVertical extends AbstractVerticle {
     public static final Logger logger = Logger.getLogger(MainVertical.class);
 
-    public static void main(String[] args){
-        Vertx vertx = Vertx.vertx();
+    public static void main(String[] args) {
+
+        Vertx.vertx().deployVerticle(MainVertical.class.getName());
+    }
 
 
+    @Override
+    public void start() {
         try {
             DButil.init(vertx,null);
             RedisUtil.init(vertx,null);
-
-
             vertx.eventBus().registerDefaultCodec(DataReqRepMessage.class, new DataReqRepMessageCover());
 
             vertx.deployVerticle(RestApiVertical.class.getName(),new DeploymentOptions().setWorker(true),re ->{
@@ -47,7 +49,6 @@ public class MainVertical  {
                 } else  {
                     System.out.println("failed " + re.cause());
                 }
-
             });
 
             vertx.deployVerticle(RabbitMqConsumer.class.getName(),new DeploymentOptions().setWorker(true),re -> {
@@ -58,7 +59,6 @@ public class MainVertical  {
                 }
 
             });
-
             vertx.deployVerticle(RabbiMqStart.class.getName(),new DeploymentOptions().setWorker(true),re -> {
                 if(re.succeeded()) {
                     System.out.println("success " + re.result());
@@ -67,20 +67,6 @@ public class MainVertical  {
                 }
 
             });
-
-
-            vertx.deployVerticle(SignalVertical.class.getName(),new DeploymentOptions().setWorker(true),re -> {
-                if(re.succeeded()) {
-                    System.out.println("success " + re.result());
-                } else  {
-                    System.out.println("failed " + re.cause());
-                }
-
-            });
-
-
-
-
         } catch (Exception e) {
             logger.error("启动服务失败!");
         }

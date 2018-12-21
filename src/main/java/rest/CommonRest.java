@@ -11,13 +11,15 @@ import io.vertx.ext.sql.ResultSet;
 import io.vertx.ext.sql.SQLConnection;
 import io.vertx.ext.web.RoutingContext;
 import org.apache.log4j.Logger;
-import sun.security.action.PutAllAction;
 import tool.DButil;
+import tool.RedisUtil;
 import tool.SignalingToken;
 
 import java.math.BigDecimal;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class CommonRest {
@@ -30,34 +32,51 @@ public class CommonRest {
     }
 
     public void setLanguage(RoutingContext routeContext) {
+        HttpServerRequest request = routeContext.request();
+        String uid = request.getParam("uid");
+        String language = request.getParam("language");
+        String key =uid+"_language";
+        RedisUtil.redisClient_.set(key,language,re->{
+           if(re.succeeded()) {
+               logger.info("put "+key+" successful");
+               routeContext.response().putHeader("content-type", "application/jintson;charset=UTF-8")
+                               .end(Json.encodePrettily(new JsonObject().put("statusCode",200).put("body","设置成功")));
+
+           }
+        });
 
 
 
     }
 
     public void saveMessage(RoutingContext routeContext) {
+
         HttpServerRequest request = routeContext.request();
+
         String body = request.getParam("body");
         String from = request.getParam("from");
         String to = request.getParam("to");
         String media = request.getParam("media");
         String messageId = request.getParam("messageId");
         String link = request.getParam("link");
+        String voiceTime1 = request.getParam("voiceTime");
+        Integer voiceTime = Integer.valueOf(voiceTime1!=null ?voiceTime1:"0");
 
         JsonObject message = new JsonObject()
-             .put("body",body)
+             .put("body",body==null?"":body )
              .put("from",from)
              .put("to",to)
              .put("message_id",messageId)
-             .put("link",link)
-             .put("send_time",System.currentTimeMillis()/1000)
-             .put("media",media);
-
+             .put("link",link==null?"":link)
+             .put("send_time",System.currentTimeMillis())
+             .put("media",media)
+             .put("voiceTime",voiceTime)   ;
+        logger.info(message.toString());
 
         vertx.eventBus().send("saveMessage",message,re ->{
             if (re.succeeded()) {
-                routeContext.response().putHeader("content-type", "application/json;charset=UTF-8")
-                        .end(Json.encodePrettily(new JsonObject().put("statusCode",200)));
+                routeContext.response().putHeader("content-type", "application/jintson;charset=UTF-8")
+                        .end(Json.encodePrettily(new JsonObject().put("statusCode",200).put("body","消息保存成功")));
             }
         });
     }
@@ -66,10 +85,39 @@ public class CommonRest {
         HttpServerRequest request = routingContext.request();
         String uid = request.getParam("uid");
         try {
-            String token = SignalingToken.getToken("uid");
+            String token = SignalingToken.getToken(uid);
+            DButil.getJdbcClient().getConnection(res->{
+                SQLConnection connection = res.result();
+                connection.querySingle("select TU_ACC,TU_SEX ,TU_ADDR , TU_MOBILE, TU_BIRTH  from app_user_inf where UID='"+uid+"'",handler->{
+                    if(handler.succeeded()){
+                        JsonArray result = handler.result();
+                        String username = result.getString(0);
+                        String addr = result.getString(2);
+                        String birth =result.getString(4);
 
-            routingContext.response().putHeader("content-type", "application/json;charset=UTF-8")
-                    .end(Json.encodePrettily(new JsonObject().put("statusCode",200).put("token",token)));
+                       RedisUtil.redisClient_.get(uid+"_language",han->{
+                           String lan = han.result();
+                           JsonObject resultBody = new JsonObject()
+                                   .put("username",username)
+                                   .put("sex",result.getString(1))
+                                   .put("addr",addr==null ?"":addr)
+                                   .put("phoneNumber",result.getString(3))
+                                   .put("birth",birth==null?"":birth)
+                                   .put("token",token)
+                                   .put("language",lan==null?"":lan)
+                                   ;
+                           routingContext.response().putHeader("content-type", "application/json;charset=UTF-8")
+                                   .end(Json.encodePrettily(new JsonObject().put("statusCode",200).put("body",resultBody)));
+
+                       }) ;
+                        }
+                    connection.close();
+                });
+
+            });
+
+
+
 
         } catch (NoSuchAlgorithmException e ) {
             e.printStackTrace();
@@ -82,35 +130,60 @@ public class CommonRest {
         String pageSize = request.getParam("pageSize");
         String from = request.getParam("from");
         String to = request.getParam("to");
-
-        String mixId = getMixId(from, to);
-
+        Integer isSelf = Integer.valueOf(request.getParam("isSelf"));
         List<Integer> minPageAndMaxPageNum = DButil.getMinPageAndMaxPageNum(pageNum, pageSize);
         DButil.getJdbcClient().getConnection(res ->{
             SQLConnection connection = res.result();
             JsonArray jsonArray = new JsonArray();
-            jsonArray.add(mixId);
+            if (isSelf!=null && isSelf==1) {
+                jsonArray.add(from);
+                jsonArray.add(to);
+            } else {
+                jsonArray.add(to);
+                jsonArray.add(from);
+            }
             jsonArray.add(minPageAndMaxPageNum.get(0));
             jsonArray.add(minPageAndMaxPageNum.get(1));
-            connection.queryWithParams("select * from im_message where mix_id = ?  order by send_time desc limit ?,?", jsonArray,re -> {
+            connection.queryWithParams("select * from im_message where `from` = ? and`to`= ?  order by send_time desc limit ?,?", jsonArray,re -> {
                 if (re.succeeded()) {
                     ResultSet result = re.result();
                     List<JsonObject> rows = result.getRows();
+
+                    Collections.sort(rows,new MessageComparator());
                     JsonArray jsonRows = new JsonArray(rows);
-                    logger.info(mixId);
-                    connection.querySingle("select count(*) from im_message where mix_id = '"+mixId+"'",queryHandler ->{
-                        JsonArray jsonCount = queryHandler.result();
-                        Integer integer = jsonCount.getInteger(0);
-                        connection.close();
-                        JsonObject rowsObj = new JsonObject().put("total",integer).put("rows",jsonRows);
+
+                    JsonArray count = new JsonArray();
+                    if (isSelf!=null && isSelf==1) {
+                        count.add(from);
+                        count.add(to);
+                    } else {
+                        count.add(to);
+                        count.add(from);
+                    }
+
+                    DButil.getJdbcClient().getConnection(queryHan->{
+                        SQLConnection sqlConnection = queryHan.result();
+                        sqlConnection.querySingleWithParams(
+                                "select count(*) from im_message where `from` = ? and `to`= ?",count,queryHandler ->{
+                                    JsonArray jsonCount = queryHandler.result();
+                                    int integer = jsonCount.getInteger(0);
+                                    Integer intSize = Integer.valueOf(pageSize);
+                                    int total = integer % intSize == 0 ? (integer / intSize) : (integer / intSize) + 1;
+                                    sqlConnection.close();
+
+                                    JsonObject rowsObj = new JsonObject().put("total",total).put("rows",jsonRows);
 
 
-                        routeContext.response().putHeader("content-type", "application/json;charset=UTF-8")
-                                .end(Json.encodePrettily(new JsonObject().put("statusCode",200).put("body",rowsObj)));
+                                    routeContext.response().putHeader("content-type", "application/json;charset=UTF-8")
+                                            .end(Json.encodePrettily(new JsonObject().put("statusCode",200).put("body",rowsObj)));
 
+
+                                });
 
                     });
+
                 }
+                connection.close();
 
             });
 
@@ -138,6 +211,7 @@ public class CommonRest {
     }
 
     public void talkList(RoutingContext routingContext) {
+        logger.info("talkList");
         HttpServerRequest request = routingContext.request();
         String uid = request.getParam("uid");
         DButil.getJdbcClient().getConnection(res ->{
@@ -152,11 +226,12 @@ public class CommonRest {
                 List<JsonArray> results = resultSet.getResults();
                 List<Future> futureList = new ArrayList<>();
                 List<JsonObject> objectList = new ArrayList<JsonObject>();
+                con.close();
                 for (JsonArray result: results) {
                     String from = result.getString(0);
                     String to = result.getString(1);
                     int id = result.getInteger(2);
-                    int time = result.getInteger(3);
+                    long time = result.getLong(3);
                     String media = result.getString(4);
                     String body = result.getString(5);
                     String link = result.getString(6);
@@ -173,9 +248,16 @@ public class CommonRest {
                     vertx.eventBus().send("getFriendUid",json,re2 ->{
                         if(re.succeeded()) {
                             String nick = (String )re2.result().body();
+                            String target = "";
+                            if(from.equals(uid)) {
+                                target = to;
+                            } else {
+                                target = from;
+                            }
 
                             JsonObject bodyJson = new JsonObject()
                                     .put("id",id)
+                                    .put("target",target)
                                     .put("time",time)
                                     .put("media",media)
                                     .put("body",body)
@@ -195,7 +277,6 @@ public class CommonRest {
                         ll.put("statusCode",200);
                         routingContext.response().putHeader("content-type", "application/json;charset=UTF-8")
                                 .end(Json.encodePrettily(ll));
-
                     }
                 });
 
@@ -209,5 +290,16 @@ public class CommonRest {
 
 
 
+    }
+
+
+    private static class MessageComparator implements Comparator<JsonObject> {
+        @Override
+        public int compare(JsonObject o1, JsonObject o2) {
+           // return o1.getChildElement("sendtime", "").getTextTrim().compareTo( o2.getChildElement("sendtime", "").getTextTrim());
+
+            return o1.getInteger("id").compareTo(o2.getInteger("id"));
+
+        }
     }
 }

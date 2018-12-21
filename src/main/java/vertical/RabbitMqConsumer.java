@@ -8,6 +8,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.sql.SQLConnection;
 import io.vertx.ext.sql.UpdateResult;
 import org.apache.log4j.Logger;
+import sun.security.pkcs11.Secmod;
 import tool.DButil;
 
 import java.io.IOException;
@@ -48,7 +49,7 @@ public class RabbitMqConsumer extends AbstractVerticle {
             channel.exchangeDeclare(exchangeName, "direct", true, false, null);
             channel.queueDeclare(queueName, true, false, false, null);
             channel.queueBind(queueName, exchangeName, routingKey);
-            String sql = "insert into im_message  (`message_id`,`from`,`to`,`media`,`body`,`send_time`,`link`,`mix_id` ) values (?,?,?,?,?,?,?,?) ";
+            String sql = "insert into im_message  (`message_id`,`from`,`to`,`media`,`body`,`send_time`,`link`,`mix_id`,`voiceTime`) values (?,?,?,?,?,?,?,?,?) ";
             boolean autoAck = false;
             channel.basicConsume(queueName, autoAck, "",
                     new DefaultConsumer(channel) {
@@ -102,52 +103,72 @@ public class RabbitMqConsumer extends AbstractVerticle {
                                                             .add(jsonObject.getString("body", ""))
                                                             .add(jsonObject.getLong("send_time", System.currentTimeMillis() / 1000L))
                                                             .add(link != null ? link : "")
-                                                            .add(String.valueOf(mixId));
+                                                            .add(String.valueOf(mixId))
+                                                            .add(jsonObject.getInteger("voiceTime"));
 
                                                     logger.debug(json);
 
-                                                    connection.updateWithParams(sql, json, re1 -> {
-                                                        if (re1.failed()) {
-                                                            re1.cause().printStackTrace();
-                                                        } else {
-                                                            connection.querySingle("select id from im_message where `message_id`='" + message_id + "'", handler -> {
-                                                                if (handler.succeeded()) {
-                                                                    Integer id = handler.result().getInteger(0);
-                                                                    JsonArray array = new JsonArray()
-                                                                            .add(id)
-                                                                            .add(System.currentTimeMillis() / 1000)
-                                                                            .add(from)
-                                                                            .add(to)
-                                                                            .add(String.valueOf(mixId));
+                                                    DButil.getJdbcClient().getConnection(insert ->{
+                                                        SQLConnection result2 = insert.result();
+                                                        result2.updateWithParams(sql, json, re1 -> {
+                                                            if (re1.failed()) {
+                                                                re1.cause().printStackTrace();
 
-                                                                    //update im_message_last set `msg_id`=? ,`modify_time`=? ,`from` =? ,`to`=? where `mix_id`=?
-                                                                    connection.updateWithParams(updateLastMessage, array, handler1 -> {
-                                                                        if (handler1.failed()) {
-                                                                            logger.error(handler1.cause());
-                                                                        } else {
-                                                                            UpdateResult result1 = handler1.result();
-                                                                            int updated = result1.getUpdated();
-                                                                            if (Integer.valueOf(updated) == 0) {
-                                                                                insertmessagelast(id, from, to, String.valueOf(mixId));
-                                                                            }
+                                                            } else {
+                                                                DButil.getJdbcClient().getConnection(selectIdHan->{
+                                                                    SQLConnection selectCon = selectIdHan.result();
+                                                                    selectCon.querySingle("select id from im_message where `message_id`='" + message_id + "'", handler -> {
+                                                                        if (handler.succeeded()) {
+                                                                            Integer id = handler.result().getInteger(0);
+                                                                            JsonArray array = new JsonArray()
+                                                                                    .add(id)
+                                                                                    .add(System.currentTimeMillis())
+                                                                                    .add(from)
+                                                                                    .add(to)
+                                                                                    .add(String.valueOf(mixId));
+
+                                                                            //update im_message_last set `msg_id`=? ,`modify_time`=? ,`from` =? ,`to`=? where `mix_id`=?
+                                                                            DButil.getJdbcClient().getConnection(updatLastHan ->{
+                                                                                SQLConnection updateLastCon = updatLastHan.result();
+                                                                                updateLastCon.updateWithParams(updateLastMessage, array, handler1 -> {
+                                                                                    if (handler1.failed()) {
+                                                                                        logger.error(handler1.cause());
+
+                                                                                    } else {
+                                                                                        UpdateResult result1 = handler1.result();
+                                                                                        int updated = result1.getUpdated();
+                                                                                        if (Integer.valueOf(updated) == 0) {
+                                                                                            insertmessagelast(id, from, to, String.valueOf(mixId));
+                                                                                        }
+
+
+                                                                                    }
+                                                                                    updateLastCon.close();
+
+                                                                                });
+                                                                            });
+
 
 
                                                                         }
-
+                                                                        selectCon.close();
                                                                     });
+                                                                });
 
 
-                                                                }
-                                                            });
 
-
-                                                        }
+                                                            }
+                                                            result2.close();
+                                                        });
 
                                                     });
 
 
+
                                                 }
                                             }
+
+                                            connection.close();
                                         });
 
 

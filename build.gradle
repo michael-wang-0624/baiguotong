@@ -2,6 +2,8 @@ plugins {
     id 'java'
     id 'application'
     id 'com.github.johnrengelman.shadow' version '1.2.3'
+    id "com.github.mtatheonly.quasar-gradle-plugin" version "0.0.1"
+
 }
 
 group 'cn.lianxian'
@@ -11,7 +13,11 @@ sourceCompatibility = 1.8
 
 repositories {
     maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+    maven { url "https://jitpack.io" }
 }
+
+apply plugin: "com.github.mtatheonly.quasar-gradle-plugin"
+
 mainClassName = 'io.vertx.core.Launcher' //<--add
 def mainVerticleName  = 'vertical.MainVertical'
 shadowJar {
@@ -23,8 +29,6 @@ shadowJar {
         include 'META-INF/services/io.vertx.core.spi.VerticleFactory'
     }
 }
-
-
 task "create-dirs" << {
     sourceSets*.java.srcDirs*.each {
         it.mkdirs()
@@ -33,7 +37,9 @@ task "create-dirs" << {
         it.mkdirs()
     }
 }
-
+configurations {
+    quasar
+}
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile 'io.vertx:vertx-core:3.5.4'
@@ -49,7 +55,21 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-annotations:2.1.0'
     compile 'mysql:mysql-connector-java:5.1.33'
     compile 'io.vertx:vertx-auth-jdbc:3.5.4'
-    compile 'io.vertx:vertx-rabbitmq-client:3.6.0'
+    compile 'io.vertx:vertx-sync:3.5.4'
+    compile 'io.vertx:vertx-rabbitmq-client:3.5.4'
     compile 'com.rabbitmq:amqp-client:5.4.1'
+    quasar  "co.paralleluniverse:quasar-core:0.8.0"
 }
+
+
+task runJava(type: JavaExec, dependsOn:[classes]) {
+    jvmArgs "-javaagent:${configurations.quasar.iterator().next()}"
+
+}
+
+tasks.withType(JavaCompile){
+    options.encoding = "UTF-8"
+}
+
+
 

@@ -24,7 +24,7 @@ public class FileRest {
     }
 
     public void savePhoto(RoutingContext routeContext) {
-
+        logger.info("savePhoto");
         HttpServerResponse response = routeContext.response();
         response.setChunked(true);
         Set<FileUpload> fileUploads = routeContext.fileUploads();
@@ -57,6 +57,7 @@ public class FileRest {
 
 
     public void uploadFile(RoutingContext routeContext) {
+        logger.info("uploadFile");
         HttpServerResponse response = routeContext.response();
         response.setChunked(true);
         Set<FileUpload> fileUploads = routeContext.fileUploads();

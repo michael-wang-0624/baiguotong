@@ -1,3 +1,4 @@
 Manifest-Version: 1.0
 Main-Verticle: vertical.MainVertical
+Main-Class: io.vertx.core.Launcher
 

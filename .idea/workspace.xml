@@ -2,19 +2,50 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="88b33e8b-3048-4d7e-ae9c-4619d88a337d" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/tool/SignalingToken.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/vertical/SignalVertical.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/vertical/TestMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileContent/annotation-processors.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/fileContent/annotation-processors.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/fileContent/fileContent.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/consumer/FriendConsumer.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/consumer/FriendConsumer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/consumer/MarkConsumer.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/consumer/MarkConsumer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rest/CommonRest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rest/CommonRest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rest/FriendRest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rest/FriendRest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rest/MarkRest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rest/MarkRest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/tool/DButil.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/tool/DButil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vertical/MainVertical.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/vertical/MainVertical.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vertical/RabbitMqConsumer$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/vertical/RabbitMqConsumer$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vertical/RabbitMqConsumer.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/vertical/RabbitMqConsumer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vertical/RestApiVertical.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/vertical/RestApiVertical.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/baiguotongIM-1.0-SNAPSHOT-fat.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/baiguotongIM-1.0-SNAPSHOT-fat.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/log4j.properties" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/log4j.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/shadowJar/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/shadowJar/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/consumer/FriendConsumer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/consumer/FriendConsumer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/log4j.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/log4j.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/classes/rest/CommonRest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/rest/CommonRest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/rest/FileRest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/rest/FileRest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/classes/rest/FriendRest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/rest/FriendRest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/tool/DButil.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/tool/DButil.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/classes/vertical/MainVertical.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/vertical/MainVertical.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/vertical/RabbitMqConsumer$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/vertical/RabbitMqConsumer$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/vertical/RabbitMqConsumer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/vertical/RabbitMqConsumer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/classes/vertical/RestApiVertical.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/vertical/RestApiVertical.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/consumer/FriendConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/consumer/FriendConsumer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/rest/CommonRest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rest/CommonRest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rest/FileRest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rest/FileRest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/rest/FriendRest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rest/FriendRest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tool/DButil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tool/DButil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/vertical/MainVertical.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vertical/MainVertical.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/vertical/RabbitMqConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vertical/RabbitMqConsumer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/vertical/RestApiVertical.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vertical/RestApiVertical.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/vertical/SignalVertical.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vertical/SignalVertical.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/vertical/TestMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vertical/TestMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/log4j.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/log4j.properties" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -27,7 +58,14 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/baiguotongIM$MainVertical.ic" NAME="MainVertical Coverage Results" MODIFIED="1544783664181" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/baiguotongIM$baiguotong__shadowJar_.ic" NAME="baiguotong [shadowJar] Coverage Results" MODIFIED="1545019798922" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/baiguotongIM$TestMessage.ic" NAME="TestMessage Coverage Results" MODIFIED="1545202748178" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>vertical.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/baiguotongIM$MainVertical.ic" NAME="MainVertical Coverage Results" MODIFIED="1545117561777" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>vertical.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/baiguotongIM$Launcher.ic" NAME="Launcher Coverage Results" MODIFIED="1545034275131" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>vertical.*</FILTER>
     </SUITE>
   </component>
@@ -48,6 +86,24 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="baiguotongIM" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="baiguotongIM" type="f1a62948:ProjectNode" />
+                <item name="Source Sets" type="e897c970:GradleViewContributor$SourceSetsNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="baiguotongIM" type="f1a62948:ProjectNode" />
+                <item name="Source Sets" type="e897c970:GradleViewContributor$SourceSetsNode" />
+                <item name="main" type="396b929e:GradleViewContributor$SourceSetNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="baiguotongIM" type="f1a62948:ProjectNode" />
+                <item name="Source Sets" type="e897c970:GradleViewContributor$SourceSetsNode" />
+                <item name="main" type="396b929e:GradleViewContributor$SourceSetNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
@@ -78,69 +134,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="RestApiVertical.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/vertical/RestApiVertical.java">
+      <file leaf-file-name="FriendConsumer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/consumer/FriendConsumer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="88" column="67" selection-start-line="88" selection-start-column="67" selection-end-line="88" selection-end-column="67" />
+            <state relative-caret-position="171">
+              <caret line="26" column="48" selection-start-line="26" selection-start-column="45" selection-end-line="26" selection-end-column="48" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SingleSignalObjectMain.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/mainclass/SingleSignalObjectMain.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="8" column="41" selection-start-line="8" selection-start-column="41" selection-end-line="8" selection-end-column="41" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WorkerThread.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/mainclass/WorkerThread.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="508">
-              <caret line="216" column="5" selection-start-line="216" selection-start-column="5" selection-end-line="216" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SignalingToken.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/tool/SignalingToken.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="341">
-              <caret line="34" selection-start-line="34" selection-end-line="34" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TestMessage.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/vertical/TestMessage.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="720">
-              <caret line="39" selection-start-line="39" selection-end-line="39" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#634#635#0" expanded="true" />
-                <element signature="e#690#691#0" expanded="true" />
-                <element signature="e#1162#1163#0" expanded="true" />
-                <element signature="e#1220#1221#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Signal.class" pinned="false" current-in-tab="false">
-        <entry file="jar://$PROJECT_DIR$/lib/agora_signal.jar!/io/agora/signal/Signal.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="233">
-              <caret line="294" column="34" selection-start-line="294" selection-start-column="30" selection-end-line="294" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -148,8 +149,24 @@
       <file leaf-file-name="FriendRest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/rest/FriendRest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="46" column="83" selection-start-line="46" selection-start-column="80" selection-end-line="46" selection-end-column="83" />
+            <state relative-caret-position="495">
+              <caret line="250" column="13" selection-start-line="250" selection-start-column="13" selection-end-line="250" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#701#702#0" expanded="true" />
+                <element signature="e#735#736#0" expanded="true" />
+                <element signature="method#searchFriend#0;class#FriendRest#0" />
+                <element signature="method#replyRequest#0;class#FriendRest#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TestMessage.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/vertical/TestMessage.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="354">
+              <caret line="15" column="5" lean-forward="true" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -157,39 +174,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CommonRest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/rest/CommonRest.java">
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
-              <caret line="68" column="45" selection-start-line="68" selection-start-column="45" selection-end-line="68" selection-end-column="45" />
-              <folding>
-                <element signature="e#716#717#0" expanded="true" />
-                <element signature="e#750#751#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="487">
+              <caret line="45" column="30" selection-start-line="45" selection-start-column="30" selection-end-line="45" selection-end-column="30" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SignalVertical.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/vertical/SignalVertical.java">
+      <file leaf-file-name="MarkRest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/rest/MarkRest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="456">
-              <caret line="93" lean-forward="true" selection-start-line="93" selection-end-line="93" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainVertical.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/vertical/MainVertical.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="155">
-              <caret line="16" selection-start-line="16" selection-end-line="16" selection-end-column="43" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="216">
+              <caret line="23" column="24" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -206,8 +204,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>handler</find>
-      <find>basic</find>
       <find>uri</find>
       <find>queueName</find>
       <find>executor</find>
@@ -220,6 +216,24 @@
       <find>signal.log</find>
       <find>LoginCallback</find>
       <find>fire_loginSuccess</find>
+      <find>addFriend</find>
+      <find>sendMsg</find>
+      <find>reply:friend</find>
+      <find>querys</find>
+      <find>result</find>
+      <find>query</find>
+      <find>run</find>
+      <find>SignalVertical</find>
+      <find>delete</find>
+      <find>search</find>
+      <find>searchFriend</find>
+      <find>addF</find>
+      <find>/1000</find>
+      <find>List</find>
+      <find>deta</find>
+      <find>updateMark</find>
+      <find>findFriendDetail</find>
+      <find>nick</find>
     </findStrings>
     <dirStrings>
       <dir>F:\code\baiguotong\src\main\java</dir>
@@ -278,6 +292,15 @@
                 <option name="description" value="Generates Gradle wrapper files." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="wrapper" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Instrument classes with Quasar Instrumentor" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="quasarInstrumentation" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="runJava" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Creates OS specific scripts to run the project as a JVM application." />
@@ -475,9 +498,9 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="6176098771061" />
+        <entry key="$PROJECT_DIR$" value="6176607316551" />
         <entry key="$PROJECT_DIR$/.gradle" value="0" />
-        <entry key="$PROJECT_DIR$/build.gradle" value="1988330097" />
+        <entry key="$PROJECT_DIR$/build.gradle" value="4240403416" />
         <entry key="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" value="2083459160" />
         <entry key="$PROJECT_DIR$/settings.gradle" value="1966180991" />
       </map>
@@ -496,6 +519,8 @@
                           <list>
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.jengelman.gradle.plugins/shadow/1.2.3/7b10b9c4a397b19ebfb80a9a6c4330325ea5606a/shadow-1.2.3-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.jengelman.gradle.plugins/shadow/1.2.3/52bbde5e384f0860df145abe24070d74dd8ed590/shadow-1.2.3.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/gradle.plugin.com.github.mtatheonly/quasar-gradle-plugin/0.0.1/6749aee214800fa8e27075e3ec368b4dfa400376/quasar-gradle-plugin-0.0.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/gradle.plugin.com.github.mtatheonly/quasar-gradle-plugin/0.0.1/a653d70dff2f4d2167973c6083e2d3cdd733ceec/quasar-gradle-plugin-0.0.1.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jdom/jdom2/2.0.5/769f3cca4ce92088288be3d0238ef96ef787e82f/jdom2-2.0.5-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jdom/jdom2/2.0.5/2001db51c131e555bafdb77fc52af6a9408c505e/jdom2-2.0.5.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm/5.0.3/f0f24f6666c1a15c7e202e91610476bd4ce59368/asm-5.0.3-sources.jar" />
@@ -510,10 +535,30 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-utils/2.0.6/3a20c424a712a7c02b02af61dcad5f001b29a9fd/plexus-utils-2.0.6.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.groovy/groovy-backports-compat23/2.4.4/8c7351852ffdd79f8e06b4052f662cc996e3598c/groovy-backports-compat23-2.4.4-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.groovy/groovy-backports-compat23/2.4.4/db18ea377b154334e5323451835d329802222fa/groovy-backports-compat23-2.4.4.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/quasar-core/0.7.7/d936ba9d36e8d21045bb2c1b718cc757d7c59358/quasar-core-0.7.7-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/quasar-core/0.7.7/e73c040f8d0cbb5fcf1b3e167e83ff95d69ff7d0/quasar-core-0.7.7.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-tree/5.0.3/f0f24f6666c1a15c7e202e91610476bd4ce59368/asm-tree-5.0.3-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-tree/5.0.3/287749b48ba7162fb67c93a026d690b29f410bed/asm-tree-5.0.3.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.ant/ant-launcher/1.9.4/b7ae945463dece0e58f3ebbf6d3d4c773277e1b2/ant-launcher-1.9.4-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.ant/ant-launcher/1.9.4/334b62cb4be0432769679e8b94e83f8fd5ed395c/ant-launcher-1.9.4.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hdrhistogram/HdrHistogram/2.1.9/966a6429061192e62cc346462587253a726db6b7/HdrHistogram-2.1.9-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hdrhistogram/HdrHistogram/2.1.9/e4631ce165eb400edecfa32e03d3f1be53dee754/HdrHistogram-2.1.9.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.dropwizard.metrics/metrics-core/3.1.2/25177c6da71f42d7934040a2f5608e3a5f81464c/metrics-core-3.1.2-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.dropwizard.metrics/metrics-core/3.1.2/224f03afd2521c6c94632f566beb1bb5ee32cf07/metrics-core-3.1.2.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.latencyutils/LatencyUtils/2.0.3/fbc38259e2077a428984637d811dac542a6a913e/LatencyUtils-2.0.3-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.latencyutils/LatencyUtils/2.0.3/769c0b82cb2421c8256300e907298a9410a2a3d3/LatencyUtils-2.0.3.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/20.0/9c8493c7991464839b612d7547d6c263adf08f75/guava-20.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/20.0/89507701249388e1ed5ddcf8c41f4ce1be7831ef/guava-20.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/de.javakaffee/kryo-serializers/0.41/5ddd1ceeb141f7cb96b349cdf3cdbfd5befaa8fc/kryo-serializers-0.41-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/de.javakaffee/kryo-serializers/0.41/9a9e9a0575cdbff2bfefac5de8bd3bf2b8d36e14/kryo-serializers-0.41.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.esotericsoftware/kryo/4.0.0/8a2ebf62fff29eb72426887b977f07b39d719ca1/kryo-4.0.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.esotericsoftware/kryo/4.0.0/9f5c64c1315ec79bee0f56bb88e4ae94b65048ce/kryo-4.0.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.esotericsoftware/reflectasm/1.11.3/d70b212888d5acf77018d6b95acded6ee551da4d/reflectasm-1.11.3-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.esotericsoftware/reflectasm/1.11.3/8b102eed2f12412b254946811111ea48bc03a266/reflectasm-1.11.3.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.esotericsoftware/minlog/1.3.0/9ee9f7fe99d5acfcb974e28acbad9349fb33a765/minlog-1.3.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.esotericsoftware/minlog/1.3.0/ff07b5f1b01d2f92bb00a337f9a94873712f0827/minlog-1.3.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.objenesis/objenesis/2.2/6b6018a6a56db58a29b9ce20837b829a6bad016b/objenesis-2.2-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.objenesis/objenesis/2.2/3fb533efdaa50a768c394aa4624144cf8df17845/objenesis-2.2.jar" />
                           </list>
                         </option>
                         <option name="path" value="$PROJECT_DIR$" />
@@ -696,25 +741,26 @@
         <option value="$PROJECT_DIR$/src/main/java/model/BusMessage.java" />
         <option value="$PROJECT_DIR$/src/main/java/model/DataReqRepMessageCover.java" />
         <option value="$PROJECT_DIR$/src/main/java/model/DataReqRepMessage.java" />
-        <option value="$PROJECT_DIR$/src/main/java/consumer/FriendConsumer.java" />
         <option value="$PROJECT_DIR$/src/main/java/rest/MarkRest.java" />
         <option value="$PROJECT_DIR$/src/main/java/tool/RedisUtil.java" />
         <option value="$PROJECT_DIR$/src/main/java/consumer/MarkConsumer.java" />
         <option value="$PROJECT_DIR$/src/main/java/tool/MqUtil.java" />
         <option value="$PROJECT_DIR$/src/main/java/Test.java" />
         <option value="$PROJECT_DIR$/src/main/java/vertical/RabbiMqStart.java" />
-        <option value="$PROJECT_DIR$/src/main/java/rest/FileRest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/tool/DButil.java" />
-        <option value="$PROJECT_DIR$/src/main/java/vertical/RabbitMqConsumer.java" />
-        <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/resources/config.json" />
+        <option value="$PROJECT_DIR$/src/main/resources/log4j.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/vertical/SignalVertical.java" />
+        <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/src/main/java/vertical/RabbitMqConsumer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/rest/FileRest.java" />
         <option value="$PROJECT_DIR$/src/main/java/vertical/MainVertical.java" />
-        <option value="$PROJECT_DIR$/src/main/java/rest/FriendRest.java" />
         <option value="$PROJECT_DIR$/src/main/java/vertical/RestApiVertical.java" />
         <option value="$PROJECT_DIR$/src/main/java/tool/SignalingToken.java" />
         <option value="$PROJECT_DIR$/src/main/java/rest/CommonRest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tool/DButil.java" />
+        <option value="$PROJECT_DIR$/src/main/java/consumer/FriendConsumer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/rest/FriendRest.java" />
         <option value="$PROJECT_DIR$/src/main/java/vertical/TestMessage.java" />
-        <option value="$PROJECT_DIR$/src/main/java/vertical/SignalVertical.java" />
       </list>
     </option>
   </component>
@@ -730,6 +776,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -741,7 +788,7 @@
             <path>
               <item name="baiguotongIM" type="b2602c69:ProjectViewProjectNode" />
               <item name="baiguotong" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="baiguotongIM" type="b2602c69:ProjectViewProjectNode" />
@@ -767,7 +814,15 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="mainclass" type="462c0819:PsiDirectoryNode" />
+              <item name="consumer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="baiguotongIM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="baiguotong" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="rest" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="baiguotongIM" type="b2602c69:ProjectViewProjectNode" />
@@ -785,17 +840,27 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="vertical" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="baiguotongIM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="baiguotong" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="baiguotongIM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="AndroidView" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="E:/code/vertx-microservices-workshop" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -821,7 +886,20 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.MainVertical">
+  <component name="RunManager" selected="Application.TestMessage">
+    <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="io.vertx.core.Launcher" />
+      <module name="baiguotongIM_main" />
+      <option name="PROGRAM_PARAMETERS" value="run vertical.MainVertical  --redeploy=&quot;src/**/*.java&quot; --launcher-class=io.vertx.core.Launcher" />
+      <option name="VM_PARAMETERS" value="-Dfile.encoding=UTF-8" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="vertical.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+    </configuration>
     <configuration name="MainVertical" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="vertical.MainVertical" />
       <module name="baiguotongIM_main" />
@@ -833,21 +911,11 @@
         </pattern>
       </extension>
     </configuration>
-    <configuration name="SingleSignalObjectMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="mainclass.SingleSignalObjectMain" />
-      <module name="baiguotongIM_main" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="mainclass.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-    </configuration>
     <configuration name="TestMessage" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="vertical.TestMessage" />
       <module name="baiguotongIM_main" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="VM_PARAMETERS" value="-javaagent:E:/maven/apache-maven-3.5.2/repository/co/paralleluniverse/quasar-core/0.7.5/quasar-core-0.7.5-jdk8.jar" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="vertical.*" />
@@ -857,6 +925,23 @@
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    </configuration>
+    <configuration name="baiguotong [runJava]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="runJava" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
     </configuration>
     <configuration name="baiguotong [shadowJar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
@@ -870,23 +955,6 @@
         <option name="taskNames">
           <list>
             <option value="shadowJar" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-    </configuration>
-    <configuration name="baiguotong [startScripts]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="startScripts" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -949,19 +1017,19 @@
     </configuration>
     <list>
       <item itemvalue="JUnit.Test.before" />
-      <item itemvalue="Application.SingleSignalObjectMain" />
+      <item itemvalue="Application.Launcher" />
+      <item itemvalue="Application.TestMessage" />
       <item itemvalue="Application.MainVertical" />
       <item itemvalue="Gradle.baiguotong [shadowJar]" />
-      <item itemvalue="Gradle.baiguotong [startScripts]" />
-      <item itemvalue="Application.TestMessage" />
+      <item itemvalue="Gradle.baiguotong [runJava]" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MainVertical" />
         <item itemvalue="Application.TestMessage" />
-        <item itemvalue="Gradle.baiguotong [startScripts]" />
+        <item itemvalue="Application.MainVertical" />
+        <item itemvalue="Gradle.baiguotong [runJava]" />
         <item itemvalue="Gradle.baiguotong [shadowJar]" />
-        <item itemvalue="Application.SingleSignalObjectMain" />
+        <item itemvalue="Application.Launcher" />
       </list>
     </recent_temporary>
   </component>
@@ -1001,110 +1069,132 @@
       <configuration name="Test.before" configurationId="JUnit" />
     </history-entry>
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="7" />
-      <window_info anchor="bottom" id="TODO" order="8" />
-      <window_info anchor="bottom" id="Messages" order="0" sideWeight="0.49946696" weight="0.32824427" />
+      <window_info anchor="bottom" id="TODO" order="8" sideWeight="0.49895832" weight="0.15319149" />
+      <window_info anchor="bottom" id="Messages" order="0" sideWeight="0.49946696" weight="0.32765958" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
       <window_info id="Image Layers" order="6" />
       <window_info anchor="right" id="Capture Analysis" order="2" />
-      <window_info anchor="bottom" id="Event Log" order="4" sideWeight="0.50053304" side_tool="true" weight="0.75027263" />
+      <window_info anchor="bottom" id="Event Log" order="4" sideWeight="0.50104165" side_tool="true" weight="0.22234042" />
       <window_info anchor="right" id="Maven Projects" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="5" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.7094883" weight="0.29880044" />
-      <window_info anchor="right" id="Coverage" order="9" sideWeight="0.503937" side_tool="true" visible="true" weight="0.15671642" />
+      <window_info anchor="bottom" id="Version Control" order="5" weight="0.21155943" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.7094883" weight="0.2212766" />
       <window_info anchor="bottom" id="Terminal" order="1" sideWeight="0.49946696" weight="0.2519084" />
       <window_info id="Capture Tool" order="3" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49835527" visible="true" weight="0.24840085" />
-      <window_info anchor="bottom" id="Build" order="6" sideWeight="0.498125" weight="0.34206897" />
-      <window_info anchor="right" id="Gradle" order="3" sideWeight="0.496063" visible="true" weight="0.15671642" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49835527" visible="true" weight="0.25052083" />
+      <window_info anchor="bottom" id="Find" order="9" weight="0.3293348" />
+      <window_info anchor="right" id="Gradle" order="3" sideWeight="0.49293968" weight="0.15671642" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info id="Favorites" order="5" sideWeight="0.50164473" side_tool="true" weight="0.25586355" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49946696" visible="true" weight="0.30752453" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49895832" visible="true" weight="0.23829788" />
       <window_info anchor="bottom" id="Inspection" order="11" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="8" type="SLIDING" weight="0.4" />
       <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="0" sideWeight="0.5007924" side_tool="true" weight="0.077083334" />
       <window_info anchor="bottom" id="Cvs" order="10" weight="0.25" />
+      <window_info anchor="bottom" id="Build" order="6" sideWeight="0.498125" weight="0.34133044" />
       <window_info anchor="bottom" id="Message" order="7" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="10" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="9" visible="true" weight="0.3293348" />
+      <window_info anchor="right" id="Coverage" order="9" sideWeight="0.50706035" side_tool="true" weight="0.15671642" />
     </layout>
+    <layout-to-restore>
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Build" order="6" sideWeight="0.498125" weight="0.34133044" />
+      <window_info id="Designer" order="2" />
+      <window_info anchor="right" id="Palette" order="7" />
+      <window_info id="Image Layers" order="6" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.7094883" weight="0.25736097" />
+      <window_info anchor="bottom" id="Cvs" order="10" weight="0.25" />
+      <window_info anchor="right" id="Coverage" order="9" sideWeight="0.50706035" side_tool="true" visible="true" weight="0.15671642" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Favorites" order="5" sideWeight="0.50164473" side_tool="true" weight="0.25586355" />
+      <window_info anchor="bottom" id="Terminal" order="1" sideWeight="0.49946696" weight="0.2519084" />
+      <window_info id="Capture Tool" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="2" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="8" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="Event Log" order="4" sideWeight="0.50053304" side_tool="true" weight="0.75027263" />
+      <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="0" sideWeight="0.5007924" side_tool="true" weight="0.077083334" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="10" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" order="5" />
+      <window_info anchor="right" id="Maven Projects" order="6" />
+      <window_info anchor="right" id="Gradle" order="3" sideWeight="0.49293968" visible="true" weight="0.15671642" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49835527" visible="true" weight="0.25373134" />
+      <window_info anchor="bottom" id="Messages" order="0" sideWeight="0.49946696" weight="0.32824427" />
+      <window_info anchor="bottom" id="Message" order="7" />
+      <window_info anchor="bottom" id="TODO" order="8" />
+      <window_info anchor="right" id="Palette&#9;" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="11" weight="0.4" />
+      <window_info anchor="bottom" id="Find" order="9" visible="true" weight="0.3293348" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49946696" visible="true" weight="0.15049073" />
+    </layout-to-restore>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/vertical/SignalVertical.java</url>
-          <line>35</line>
-          <properties />
-          <option name="timeStamp" value="155" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/vertical/SignalVertical.java</url>
-          <line>42</line>
-          <properties />
-          <option name="timeStamp" value="157" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="158" />
+      <option name="time" value="225" />
     </breakpoint-manager>
   </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>integer%intSize</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.vertx/vertx-core/3.5.4/7aebf47c0b9f35b297276eb006b91151a2f756e5/vertx-core-3.5.4-sources.jar!/io/vertx/core/impl/ContextImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="530">
-          <caret line="361" column="7" selection-start-line="361" selection-start-column="7" selection-end-line="361" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.vertx/vertx-redis-client/3.5.2.CR3/448f8837db6538abea5bae04c55d142b16623ead/vertx-redis-client-3.5.2.CR3-sources.jar!/io/vertx/redis/impl/Command.java" />
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.vertx/vertx-web/3.5.4/92d582ddec7328f6f7a7071d5c9a10c3514d41a0/vertx-web-3.5.4-sources.jar!/io/vertx/ext/web/impl/RoutingContextImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="135" selection-start-line="135" selection-end-line="135" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.vertx/vertx-web/3.5.4/92d582ddec7328f6f7a7071d5c9a10c3514d41a0/vertx-web-3.5.4-sources.jar!/io/vertx/ext/web/handler/impl/BodyHandlerImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="73" column="30" selection-start-line="73" selection-start-column="30" selection-end-line="73" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.vertx/vertx-core/3.5.4/7aebf47c0b9f35b297276eb006b91151a2f756e5/vertx-core-3.5.4-sources.jar!/io/vertx/core/http/impl/HttpServerRequestImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="418" selection-start-line="418" selection-end-line="418" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.vertx/vertx-web/3.5.4/92d582ddec7328f6f7a7071d5c9a10c3514d41a0/vertx-web-3.5.4-sources.jar!/io/vertx/ext/web/RoutingContext.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="242" column="23" selection-start-line="242" selection-start-column="23" selection-end-line="242" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.vertx/vertx-rabbitmq-client/3.5.4/d285fa717f12f3653a533ce562ab52dee335c3fe/vertx-rabbitmq-client-3.5.4-sources.jar!/io/vertx/rabbitmq/RabbitMQClient.java" />
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.rabbitmq/amqp-client/3.6.5/d8fd3650d48368b81c746d0b64d07654932bcb89/amqp-client-3.6.5-sources.jar!/com/rabbitmq/client/Channel.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/tool/RedisUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="358">
           <caret line="15" column="30" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1121,16 +1211,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="104" column="74" selection-start-line="104" selection-start-column="67" selection-end-line="104" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vertical/RabbiMqStart.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="689">
-          <caret line="36" selection-start-line="36" selection-end-line="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1159,10 +1239,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="193">
           <caret line="37" column="35" selection-start-line="37" selection-start-column="35" selection-end-line="37" selection-end-column="35" />
-          <folding>
-            <element signature="e#1440#1441#0" expanded="true" />
-            <element signature="e#1505#1506#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1201,51 +1277,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/consumer/MarkConsumer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1493">
-          <caret line="71" selection-start-line="71" selection-end-line="71" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/rest/MarkRest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1392">
-          <caret line="66" column="12" selection-start-line="66" selection-start-column="12" selection-end-line="67" selection-end-column="50" />
-          <folding>
-            <element signature="e#413#414#0" expanded="true" />
-            <element signature="e#447#448#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/fdfs_client.conf">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tool/DButil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1320">
-          <caret line="67" column="26" selection-start-line="67" selection-start-column="26" selection-end-line="67" selection-end-column="26" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/mainclass/MulteSignalObjectMain2.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
           <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vertical/RabbitMqConsumer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="794">
-          <caret line="137" lean-forward="true" selection-start-line="137" selection-end-line="137" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1260,24 +1298,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
           <caret line="164" column="64" selection-start-line="164" selection-start-column="64" selection-end-line="164" selection-end-column="64" />
-          <folding>
-            <element signature="e#3550#3551#0" expanded="true" />
-            <element signature="e#3581#3582#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-library/2.12.4/7663f74ef944453c86cc7e6597ed33e9281f6412/scala-library-2.12.4.jar!/scala/concurrent/impl/CallbackRunnable.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="51" column="13" lean-forward="true" selection-start-line="51" selection-start-column="13" selection-end-line="51" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/rest/FileRest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="44" column="15" selection-start-line="44" selection-start-column="15" selection-end-line="44" selection-end-column="15" />
         </state>
       </provider>
     </entry>
@@ -1288,38 +1308,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.vertx/vertx-web/3.5.4/92d582ddec7328f6f7a7071d5c9a10c3514d41a0/vertx-web-3.5.4-sources.jar!/io/vertx/ext/web/impl/RouteImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="225" selection-start-line="225" selection-end-line="225" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="1" selection-start-line="24" selection-start-column="1" selection-end-line="24" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/consumer/FriendConsumer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="21" column="37" selection-start-line="21" selection-end-line="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/text/SimpleDateFormat.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="478">
           <caret line="577" column="27" selection-start-line="577" selection-start-column="11" selection-end-line="577" selection-end-column="27" />
-          <folding>
-            <element signature="e#23443#23444#0" expanded="true" />
-            <element signature="e#23515#23516#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1327,10 +1319,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
           <caret line="883" column="16" selection-start-line="883" selection-start-column="16" selection-end-line="883" selection-end-column="16" />
-          <folding>
-            <element signature="e#37718#37719#0" expanded="true" />
-            <element signature="e#37754#37755#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1345,30 +1333,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-610">
           <caret line="1773" column="57" selection-start-line="1773" selection-start-column="45" selection-end-line="1773" selection-end-column="57" />
-          <folding>
-            <element signature="e#70577#70578#0" expanded="true" />
-            <element signature="e#70627#70628#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vertical/RestApiVertical.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="88" column="67" selection-start-line="88" selection-start-column="67" selection-end-line="88" selection-end-column="67" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vertical/MainVertical.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="16" selection-start-line="16" selection-end-line="16" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1379,47 +1343,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tool/SignalingToken.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="34" selection-start-line="34" selection-end-line="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/mainclass/WorkerThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="508">
-          <caret line="216" column="5" selection-start-line="216" selection-start-column="5" selection-end-line="216" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/rest/FriendRest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="46" column="83" selection-start-line="46" selection-start-column="80" selection-end-line="46" selection-end-column="83" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vertical/TestMessage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="39" selection-start-line="39" selection-end-line="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#634#635#0" expanded="true" />
-            <element signature="e#690#691#0" expanded="true" />
-            <element signature="e#1162#1163#0" expanded="true" />
-            <element signature="e#1220#1221#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/lib/agora_signal.jar!/io/agora/signal/Signal.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="233">
@@ -1427,21 +1350,215 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.vertx/vertx-core/3.6.0/bd75db223ef1e92ed41aeb14e8c11fb7d5c7dcb1/vertx-core-3.6.0-sources.jar!/io/vertx/core/http/HttpServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="183" column="7" selection-start-line="183" selection-start-column="7" selection-end-line="183" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/mainclass/WorkerThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="208" column="44" selection-start-line="208" selection-start-column="44" selection-end-line="208" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/log4j.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="20" column="34" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-library/2.12.4/7663f74ef944453c86cc7e6597ed33e9281f6412/scala-library-2.12.4.jar!/scala/concurrent/impl/CallbackRunnable.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="751">
+          <caret line="53" selection-start-line="53" selection-end-line="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.vertx/vertx-sql-common/3.5.4/b66f4c621d540aadc06ecd88378d54cf502d33f6/vertx-sql-common-3.5.4-sources.jar!/io/vertx/ext/sql/SQLConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="80" column="79" selection-start-line="80" selection-start-column="66" selection-end-line="80" selection-end-column="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.vertx/vertx-sql-common/3.5.4/b66f4c621d540aadc06ecd88378d54cf502d33f6/vertx-sql-common-3.5.4-sources.jar!/io/vertx/ext/sql/SQLOperations.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="64" column="10" selection-start-line="64" selection-start-column="10" selection-end-line="64" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.vertx/vertx-sql-common/3.5.4/b66f4c621d540aadc06ecd88378d54cf502d33f6/vertx-sql-common-3.5.4-sources.jar!/io/vertx/ext/sql/SQLClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="40" column="12" selection-start-line="40" selection-start-column="12" selection-end-line="40" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.vertx/vertx-sync/3.5.4/a42ee02cbc00a8dcc5554814b2470b7a061f0075/vertx-sync-3.5.4-sources.jar!/io/vertx/ext/sync/Sync.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="49" selection-start-line="49" selection-end-line="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.vertx/vertx-sync/3.5.4/a42ee02cbc00a8dcc5554814b2470b7a061f0075/vertx-sync-3.5.4-sources.jar!/io/vertx/ext/sync/SyncVerticle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="48" column="5" selection-start-line="48" selection-start-column="5" selection-end-line="48" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.vertx/vertx-web/3.5.4/92d582ddec7328f6f7a7071d5c9a10c3514d41a0/vertx-web-3.5.4-sources.jar!/io/vertx/ext/web/impl/RouteImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2160">
+          <caret line="116" column="11" selection-start-line="116" selection-start-column="11" selection-end-line="116" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vertical/RabbiMqStart.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="30" column="32" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/consumer/MarkConsumer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/rest/FileRest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="58" column="56" selection-start-line="58" selection-start-column="56" selection-end-line="58" selection-end-column="56" />
+          <folding>
+            <element signature="method#savePhoto#0;class#FileRest#0" />
+            <element signature="method#uploadFile#0;class#FileRest#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vertical/MainVertical.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="237">
+          <caret line="29" column="39" selection-start-line="29" selection-start-column="39" selection-end-line="29" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/tool/SignalingToken.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vertical/RabbitMqConsumer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="670">
+          <caret line="124" column="97" selection-start-line="124" selection-start-column="97" selection-end-line="124" selection-end-column="97" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/rest/CommonRest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="68" column="45" selection-start-line="68" selection-start-column="45" selection-end-line="68" selection-end-column="45" />
+        <state relative-caret-position="170">
+          <caret line="216" column="21" selection-start-line="216" selection-start-column="15" selection-end-line="216" selection-end-column="28" />
           <folding>
-            <element signature="e#716#717#0" expanded="true" />
-            <element signature="e#750#751#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="method#getMixId#0;class#CommonRest#0" />
+            <element signature="method#searchMessages#0;class#CommonRest#0" />
+            <element signature="class#MessageComparator#0;class#CommonRest#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/tool/DButil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1368">
+          <caret line="57" lean-forward="true" selection-start-line="57" selection-end-line="57" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#413#414#0" expanded="true" />
+            <element signature="e#433#434#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/vertical/SignalVertical.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="93" lean-forward="true" selection-start-line="93" selection-end-line="93" />
+        <state relative-caret-position="-432">
+          <caret line="30" column="60" selection-start-line="30" selection-start-column="33" selection-end-line="30" selection-end-column="60" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vertical/RestApiVertical.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="257">
+          <caret line="61" column="97" lean-forward="true" selection-start-line="61" selection-start-column="97" selection-end-line="61" selection-end-column="97" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/rest/MarkRest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="23" column="24" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/consumer/FriendConsumer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="26" column="48" selection-start-line="26" selection-start-column="45" selection-end-line="26" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/rest/FriendRest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="250" column="13" selection-start-line="250" selection-start-column="13" selection-end-line="250" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#701#702#0" expanded="true" />
+            <element signature="e#735#736#0" expanded="true" />
+            <element signature="method#searchFriend#0;class#FriendRest#0" />
+            <element signature="method#replyRequest#0;class#FriendRest#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="487">
+          <caret line="45" column="30" selection-start-line="45" selection-start-column="30" selection-end-line="45" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vertical/TestMessage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="354">
+          <caret line="15" column="5" lean-forward="true" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1465,7 +1582,7 @@
       </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
-          <last-edited>No facets are configured</last-edited>
+          <last-edited />
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1525,7 +1642,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>Gradle: com.fasterxml.jackson.core:jackson-annotations:2.9.0</last-edited>
+          <last-edited />
           <splitter-proportions>
             <option name="proportions">
               <list>
