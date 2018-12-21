@@ -85,10 +85,14 @@ public class RestApiVertical extends AbstractVerticle {
         router.route(HttpMethod.GET,"/talkList").handler((new CommonRest(vertx)::talkList));
 
         router.route(HttpMethod.GET,"/getToken").handler(new CommonRest(vertx)::getToken);
+        router.route(HttpMethod.GET,"/getUserDetail").handler(new CommonRest(vertx)::getUserDetail);
+
 
         router.route(HttpMethod.POST,"/replyRequest").handler(new FriendRest(vertx)::replyRequest);
 
         router.route(HttpMethod.GET,"/getAddFriendList").handler(new FriendRest(vertx)::getAddFriendList);
+
+        router.route(HttpMethod.GET,"/getMediaToken").handler(new CommonRest(vertx)::getMediaToken);
 
         httpServer.requestHandler(router::accept).listen(8081);
 

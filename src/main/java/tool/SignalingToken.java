@@ -1,5 +1,8 @@
 package tool;
 
+import io.agora.media.AccessToken;
+import io.agora.media.SimpleTokenBuilder;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
@@ -9,6 +12,9 @@ import java.util.Date;
 public class SignalingToken {
     private static final String appId = "20aec784743645a6a48d0c2fdccc381d";
     private static final String app_cert = "addf4632548246b585ac5e640bf323dd";
+
+    //private static final String appId = "20aec784743645a6a48d0c2fdccc381d";
+    //private static final String app_cert = "addf4632548246b585ac5e640bf323dd";
 
 
     public static String getToken(   String account) throws NoSuchAlgorithmException {
@@ -31,6 +37,27 @@ public class SignalingToken {
         String token = hexlify(output);
         String token_String = new StringBuilder().append("1").append(":").append(appId).append(":").append(timestamp).append(":").append(token).toString();
         return token_String;
+    }
+
+    public static String getMediaToken(String uid,String channelName){
+
+        String result = "";
+        try {
+            Date date = new Date();
+            int time = (int)(date.getTime()/1000) + 7200 ;
+            SimpleTokenBuilder token = new SimpleTokenBuilder(appId, app_cert, channelName, uid);
+            token.initPrivileges(SimpleTokenBuilder.Role.Role_Attendee);
+            token.setPrivilege(AccessToken.Privileges.kJoinChannel, time);
+            token.setPrivilege(AccessToken.Privileges.kPublishAudioStream, time);
+            token.setPrivilege(AccessToken.Privileges.kPublishVideoStream, time);
+            token.setPrivilege(AccessToken.Privileges.kPublishDataStream, time);
+
+            result = token.buildToken();
+            System.out.println(result);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
     public static String hexlify(byte[] data) {

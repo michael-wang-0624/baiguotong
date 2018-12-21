@@ -87,10 +87,7 @@ public class FriendConsumer extends AbstractVerticle {
         vertx.eventBus().consumer("searchFriend", handler -> {
             JsonObject json = (JsonObject)handler.body();
             String phoneNumber = json.getString("phoneNumber");
-            //String name = json.getString("name");
-
-
-
+            String name = json.getString("uid");
             String sql = "select UID,TU_ACC,TU_SEX ,TU_SYSTEM_LAN,TU_ADDR from app_user_inf where TU_MOBILE= '"+ phoneNumber +"' AND TU_STATUS ='1' ";
             DButil.getJdbcClient().getConnection(res ->{
                if(res.succeeded()) {
@@ -106,17 +103,23 @@ public class FriendConsumer extends AbstractVerticle {
                                 resultBody = new JsonObject();
                             } else {
                                 String uid = result.getString(0);
-                                String username = result.getString(1);
-                                String sex  = result.getString(2);
-                                String sysLanguge = result.getString(3);
-                                String addr = result.getString(4);
-                                resultBody = new JsonObject().put("uid",uid)
-                                        .put("username",username)
-                                        .put("sex",sex)
-                                        .put("language",sysLanguge==null ?"":sysLanguge)
-                                        .put("addr",addr==null ?"":addr);
-                                jsonArray.add(resultBody);
+                                if (uid.equals(name)){
+                                    resultBody = new JsonObject();
+                                } else {
+                                    String username = result.getString(1);
+                                    String sex  = result.getString(2);
+                                    String sysLanguge = result.getString(3);
+                                    String addr = result.getString(4);
+                                    resultBody = new JsonObject().put("uid",uid)
+                                            .put("username",username)
+                                            .put("sex",sex)
+                                            .put("language",sysLanguge==null ?"":sysLanguge)
+                                            .put("addr",addr==null ?"":addr);
+                                    jsonArray.add(resultBody);
+                                }
+
                             }
+
                             rep.setCode(200);
 
 

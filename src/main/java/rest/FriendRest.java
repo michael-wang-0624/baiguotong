@@ -60,7 +60,8 @@ public class FriendRest {
         HttpServerRequest request = routeContext.request();
 
         String phoneNumber = request.getParam("phoneNumber");
-        vertx.eventBus().send("searchFriend",new JsonObject().put("phoneNumber",phoneNumber),re ->{
+        String uid = request.getParam("uid");
+        vertx.eventBus().send("searchFriend",new JsonObject().put("phoneNumber",phoneNumber).put("uid",uid),re ->{
            if(re.succeeded()) {
                routeContext.response().setChunked(true);
                logger.info(re.result().body());

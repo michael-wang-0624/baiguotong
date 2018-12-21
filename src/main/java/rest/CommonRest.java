@@ -31,6 +31,15 @@ public class CommonRest {
         this.vertx = vertx;
     }
 
+    public void getMediaToken(RoutingContext routingContext) {
+        HttpServerRequest request = routingContext.request();
+        String uid = request.getParam("uid");
+        String channelName = request.getParam("channelName");
+        String mediaToken = SignalingToken.getMediaToken(uid, channelName);
+        routingContext.response().putHeader("content-type", "application/json;charset=UTF-8")
+                .end(Json.encodePrettily(new JsonObject().put("statusCode",200).put("mediaToken",mediaToken)));
+    }
+
     public void setLanguage(RoutingContext routeContext) {
         HttpServerRequest request = routeContext.request();
         String uid = request.getParam("uid");
@@ -39,14 +48,11 @@ public class CommonRest {
         RedisUtil.redisClient_.set(key,language,re->{
            if(re.succeeded()) {
                logger.info("put "+key+" successful");
-               routeContext.response().putHeader("content-type", "application/jintson;charset=UTF-8")
+               routeContext.response().putHeader("content-type", "application/json;charset=UTF-8")
                                .end(Json.encodePrettily(new JsonObject().put("statusCode",200).put("body","设置成功")));
 
            }
         });
-
-
-
     }
 
     public void saveMessage(RoutingContext routeContext) {
@@ -75,10 +81,55 @@ public class CommonRest {
 
         vertx.eventBus().send("saveMessage",message,re ->{
             if (re.succeeded()) {
-                routeContext.response().putHeader("content-type", "application/jintson;charset=UTF-8")
+                routeContext.response().putHeader("content-type", "application/json;charset=UTF-8")
                         .end(Json.encodePrettily(new JsonObject().put("statusCode",200).put("body","消息保存成功")));
             }
         });
+    }
+
+    public void getUserDetail(RoutingContext routingContext) {
+        HttpServerRequest request = routingContext.request();
+        String uid = request.getParam("uid");
+            DButil.getJdbcClient().getConnection(res->{
+                SQLConnection connection = res.result();
+                connection.querySingle("select TU_ACC,TU_SEX ,TU_ADDR , TU_MOBILE, TU_BIRTH  from app_user_inf where UID='"+uid+"'",handler->{
+                    if(handler.succeeded()){
+                        JsonArray result = handler.result();
+
+                        String addr = result.getString(2);
+                        String birth =result.getString(4);
+
+                        RedisUtil.redisClient_.get(uid+"_language",han->{
+                            String lan = han.result();
+                            RedisUtil.redisClient_.get("mark_"+uid,usernameHan->{
+                                String username = result.getString(0);
+                                if (usernameHan.succeeded()){
+                                    String name = usernameHan.result();
+                                    if (name!=null) {
+                                        username= name;
+                                    }
+                                    JsonObject resultBody = new JsonObject()
+                                            .put("username",username)
+                                            .put("sex",result.getString(1))
+                                            .put("addr",addr==null ?"":addr)
+                                            .put("phoneNumber",result.getString(3))
+                                            .put("birth",birth==null?"":birth)
+                                            .put("language",lan==null?"":lan)
+                                            ;
+                                    routingContext.response().putHeader("content-type", "application/json;charset=UTF-8")
+                                            .end(Json.encodePrettily(new JsonObject().put("statusCode",200).put("body",resultBody)));
+
+                                }
+                            });
+
+
+                        }) ;
+                    }
+                    connection.close();
+                });
+
+            });
+
     }
 
     public void getToken(RoutingContext routingContext) {
@@ -91,23 +142,34 @@ public class CommonRest {
                 connection.querySingle("select TU_ACC,TU_SEX ,TU_ADDR , TU_MOBILE, TU_BIRTH  from app_user_inf where UID='"+uid+"'",handler->{
                     if(handler.succeeded()){
                         JsonArray result = handler.result();
-                        String username = result.getString(0);
+
                         String addr = result.getString(2);
                         String birth =result.getString(4);
 
                        RedisUtil.redisClient_.get(uid+"_language",han->{
                            String lan = han.result();
-                           JsonObject resultBody = new JsonObject()
-                                   .put("username",username)
-                                   .put("sex",result.getString(1))
-                                   .put("addr",addr==null ?"":addr)
-                                   .put("phoneNumber",result.getString(3))
-                                   .put("birth",birth==null?"":birth)
-                                   .put("token",token)
-                                   .put("language",lan==null?"":lan)
-                                   ;
-                           routingContext.response().putHeader("content-type", "application/json;charset=UTF-8")
-                                   .end(Json.encodePrettily(new JsonObject().put("statusCode",200).put("body",resultBody)));
+                           RedisUtil.redisClient_.get("mark_"+uid,usernameHan->{
+                               String username = result.getString(0);
+                               if (usernameHan.succeeded()){
+                                   String name = usernameHan.result();
+                                   if (name!=null) {
+                                       username= name;
+                                   }
+                                   JsonObject resultBody = new JsonObject()
+                                           .put("username",username)
+                                           .put("sex",result.getString(1))
+                                           .put("addr",addr==null ?"":addr)
+                                           .put("phoneNumber",result.getString(3))
+                                           .put("birth",birth==null?"":birth)
+                                           .put("token",token)
+                                           .put("language",lan==null?"":lan)
+                                           ;
+                                   routingContext.response().putHeader("content-type", "application/json;charset=UTF-8")
+                                           .end(Json.encodePrettily(new JsonObject().put("statusCode",200).put("body",resultBody)));
+
+                               }
+                           });
+
 
                        }) ;
                         }
