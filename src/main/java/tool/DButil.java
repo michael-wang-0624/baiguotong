@@ -88,6 +88,27 @@ public class DButil extends AbstractVerticle  {
                 handler1.reply(resultSet);
             });
         });
+
+
+		vertx.eventBus().consumer("querySingle",handler1 ->{
+			vertx.executeBlocking(block ->{
+				client.getConnection(res->{
+					JsonObject json = (JsonObject)handler1.body();
+					String sql = json.getString("sql");
+					//JsonArray jsonarray = json.getJsonArray("json");
+					SQLConnection connection = res.result();
+					connection.querySingle(sql,handler->{
+						JsonArray array = handler.result();
+						block.complete(array);
+						connection.close();
+					});
+				});
+			},res->{
+				JsonArray resultSet = (JsonArray)res.result();
+
+				handler1.reply(resultSet);
+			});
+		});
     }
 
     public static int init1(Vertx vertx, JsonObject config){

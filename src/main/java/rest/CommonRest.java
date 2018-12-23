@@ -142,52 +142,60 @@ public class CommonRest {
 
     public void getToken(RoutingContext routingContext) {
         HttpServerRequest request = routingContext.request();
+
         String uid = request.getParam("uid");
-        try {
-            String token = SignalingToken.getToken(uid);
-            DButil.getJdbcClient().getConnection(res->{
-                SQLConnection connection = res.result();
+
+            String sql ="select TU_ACC,TU_SEX ,TU_ADDR , TU_MOBILE, TU_BIRTH  from app_user_inf where UID='"+uid+"'";
+            JsonObject ob = new JsonObject().put("sql", sql);
+            vertx.eventBus().send("querySingle",ob,res->{
+                JsonArray result =   (JsonArray)res.result().body();
+                if (result !=null) {
+                    String addr = result.getString(2);
+                    String birth =result.getString(4);
+
+                    RedisUtil.redisClient_.get(uid+"_language",han->{
+                        String lan = han.result();
+                        RedisUtil.redisClient_.get("mark_"+uid,usernameHan->{
+                            String username = result.getString(0);
+                            if (usernameHan.succeeded()){
+
+                                String name = usernameHan.result();
+                                if (name!=null) {
+                                    username= name;
+                                }
+                                String token="";
+                                try {
+                                    token = SignalingToken.getToken(uid);
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                }
+                                JsonObject resultBody = new JsonObject()
+                                        .put("username",username)
+                                        .put("sex",result.getString(1))
+                                        .put("addr",addr==null ?"":addr)
+                                        .put("phoneNumber",result.getString(3))
+                                        .put("birth",birth==null?"":birth)
+                                        .put("token",token)
+                                        .put("language",lan==null?"":lan)
+                                        ;
+                                routingContext.response().putHeader("content-type", "application/json;charset=UTF-8")
+                                        .end(Json.encodePrettily(new JsonObject().put("statusCode",200).put("body",resultBody)));
+                            }
+                        });
+                    }) ;
+                } else {
+                    routingContext.response().putHeader("content-type", "application/json;charset=UTF-8")
+                            .end(Json.encodePrettily(new JsonObject().put("statusCode",200).put("body", new JsonObject())));
+                }
+            });
+
+
+            //DButil.getJdbcClient().getConnection(res->{
+           /*     SQLConnection connection = res.result();
                 connection.querySingle("select TU_ACC,TU_SEX ,TU_ADDR , TU_MOBILE, TU_BIRTH  from app_user_inf where UID='"+uid+"'",handler->{
                     if(handler.succeeded()){
                         JsonArray result = handler.result();
-                        if (result !=null) {
-                            String addr = result.getString(2);
-                            String birth =result.getString(4);
 
-                            RedisUtil.redisClient_.get(uid+"_language",han->{
-                                String lan = han.result();
-                                RedisUtil.redisClient_.get("mark_"+uid,usernameHan->{
-                                    connection.close();
-                                    String username = result.getString(0);
-                                    if (usernameHan.succeeded()){
-
-                                        String name = usernameHan.result();
-                                        if (name!=null) {
-                                            username= name;
-                                        }
-                                        JsonObject resultBody = new JsonObject()
-                                                .put("username",username)
-                                                .put("sex",result.getString(1))
-                                                .put("addr",addr==null ?"":addr)
-                                                .put("phoneNumber",result.getString(3))
-                                                .put("birth",birth==null?"":birth)
-                                                .put("token",token)
-                                                .put("language",lan==null?"":lan)
-                                                ;
-                                        routingContext.response().putHeader("content-type", "application/json;charset=UTF-8")
-                                                .end(Json.encodePrettily(new JsonObject().put("statusCode",200).put("body",resultBody)));
-
-                                    }
-
-                                });
-
-
-                            }) ;
-                        } else {
-                            routingContext.response().putHeader("content-type", "application/json;charset=UTF-8")
-                                    .end(Json.encodePrettily(new JsonObject().put("statusCode",200).put("body", new JsonObject())));
-                            connection.close();
-                        }
                     } else
                     {
                         logger.error(handler.cause().getMessage());
@@ -195,14 +203,12 @@ public class CommonRest {
 
                 });
 
-            });
+            });*/
 
 
 
 
-        } catch (NoSuchAlgorithmException e ) {
-            e.printStackTrace();
-        }
+
     }
 
     public void getMessages(RoutingContext routeContext) {

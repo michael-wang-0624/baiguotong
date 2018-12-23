@@ -2,70 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="88b33e8b-3048-4d7e-ae9c-4619d88a337d" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tool/ResultSetCover.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/fileContent/fileContent.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/consumer/FriendConsumer.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/consumer/FriendConsumer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/consumer/MarkConsumer.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/consumer/MarkConsumer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rest/CommonRest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rest/FileRest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rest/FriendRest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rest/MarkRest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/tool/Constant.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/tool/DButil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/tool/FastDFSClient.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/tool/FastDFSFile.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/tool/FileUploadUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/tool/PrintToScreen.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/tool/ReadWriteDialogue.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/tool/RedisUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/tool/SignalingToken.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vertical/MainVertical.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vertical/RabbiMqStart.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vertical/RabbitMqConsumer$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vertical/RabbitMqConsumer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vertical/RestApiVertical.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vertical/SignalVertical$1$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vertical/SignalVertical$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vertical/SignalVertical.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vertical/TestMessage.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/libs/baiguotongIM-1.0-SNAPSHOT-fat.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/baiguotongIM-1.0-SNAPSHOT-fat.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/config.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/consumer/FriendConsumer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/consumer/FriendConsumer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/consumer/MarkConsumer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/consumer/MarkConsumer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/fdfs_client.conf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/log4j.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/rest/CommonRest$MessageComparator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/rest/CommonRest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/rest/FriendRest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/rest/FriendRest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/tool/DButil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/tool/FastDFSClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/tool/FastDFSClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/tool/SignalingToken.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/tool/SignalingToken.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/vertical/MainVertical.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/vertical/MainVertical.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/vertical/RabbitMqConsumer$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/vertical/RabbitMqConsumer$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/vertical/RabbitMqConsumer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/vertical/RabbitMqConsumer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/vertical/RestApiVertical.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/vertical/RestApiVertical.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/vertical/TestMessage.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/log4j.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/log4j.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/consumer/FriendConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/consumer/FriendConsumer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/consumer/MarkConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/consumer/MarkConsumer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/rest/CommonRest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rest/CommonRest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rest/FriendRest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rest/FriendRest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tool/DButil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tool/DButil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tool/FastDFSClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tool/FastDFSClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tool/SignalingToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tool/SignalingToken.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vertical/MainVertical.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vertical/MainVertical.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vertical/RabbitMqConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vertical/RabbitMqConsumer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vertical/RestApiVertical.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vertical/RestApiVertical.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vertical/TestMessage.java" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -136,11 +74,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="DButil.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DButil.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/tool/DButil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="424">
-              <caret line="76" column="43" selection-start-line="76" selection-start-column="43" selection-end-line="76" selection-end-column="43" />
+            <state relative-caret-position="328">
+              <caret line="92" column="46" selection-start-line="92" selection-start-column="35" selection-end-line="92" selection-end-column="46" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#413#414#0" expanded="true" />
@@ -162,11 +100,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CommonRest.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CommonRest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/rest/CommonRest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="257" column="64" selection-start-line="257" selection-start-column="43" selection-end-line="257" selection-end-column="64" />
+            <state relative-caret-position="329">
+              <caret line="165" column="45" selection-start-line="165" selection-start-column="45" selection-end-line="165" selection-end-column="45" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#832#833#0" expanded="true" />
@@ -810,7 +748,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="138" />
     <option name="y" value="64" />
     <option name="width" value="1616" />
@@ -1028,7 +966,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.MainVertical">
+  <component name="RunManager" selected="Gradle.baiguotong [shadowJar]">
     <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="io.vertx.core.Launcher" />
       <module name="baiguotongIM_main" />
@@ -1226,19 +1164,19 @@
     <layout>
       <window_info anchor="right" id="Palette" order="7" />
       <window_info anchor="bottom" id="TODO" order="8" sideWeight="0.49895832" weight="0.15319149" />
-      <window_info anchor="bottom" id="Messages" order="0" sideWeight="0.49946696" weight="0.17775354" />
+      <window_info active="true" anchor="bottom" id="Messages" order="0" sideWeight="0.49946696" visible="true" weight="0.17775354" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
       <window_info id="Image Layers" order="6" />
       <window_info anchor="right" id="Capture Analysis" order="2" />
       <window_info anchor="bottom" id="Event Log" order="4" sideWeight="0.50159913" side_tool="true" weight="0.23773174" />
       <window_info anchor="right" id="Maven Projects" order="6" />
       <window_info anchor="bottom" id="Version Control" order="5" weight="0.21155943" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.7094883" visible="true" weight="0.30861506" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.7094883" weight="0.30861506" />
       <window_info anchor="right" id="Coverage" order="9" sideWeight="0.50923485" side_tool="true" weight="0.15671642" />
       <window_info anchor="bottom" id="Terminal" order="1" sideWeight="0.49946696" weight="0.2519084" />
       <window_info id="Capture Tool" order="3" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49835527" weight="0.26119402" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49835527" visible="true" weight="0.26066098" />
       <window_info anchor="bottom" id="Build" order="6" sideWeight="0.498125" weight="0.1570338" />
       <window_info anchor="right" id="Gradle" order="3" sideWeight="0.49076518" weight="0.15671642" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -1319,21 +1257,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/rest/CommonRest.java</url>
-          <line>259</line>
-          <properties />
-          <option name="timeStamp" value="317" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/tool/DButil.java</url>
-          <line>75</line>
-          <properties />
-          <option name="timeStamp" value="318" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="319" />
+      <option name="time" value="320" />
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
@@ -1714,10 +1638,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/tool/DButil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="92" column="46" selection-start-line="92" selection-start-column="35" selection-end-line="92" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#413#414#0" expanded="true" />
+            <element signature="e#433#434#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/rest/CommonRest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="257" column="64" selection-start-line="257" selection-start-column="43" selection-end-line="257" selection-end-column="64" />
+        <state relative-caret-position="329">
+          <caret line="165" column="45" selection-start-line="165" selection-start-column="45" selection-end-line="165" selection-end-column="45" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#832#833#0" expanded="true" />
@@ -1726,18 +1662,6 @@
             <element signature="method#getMixId#0;class#CommonRest#0" />
             <element signature="method#searchMessages#0;class#CommonRest#0" />
             <element signature="class#MessageComparator#0;class#CommonRest#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tool/DButil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="424">
-          <caret line="76" column="43" selection-start-line="76" selection-start-column="43" selection-end-line="76" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#413#414#0" expanded="true" />
-            <element signature="e#433#434#0" expanded="true" />
           </folding>
         </state>
       </provider>
