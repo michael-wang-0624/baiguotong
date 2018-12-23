@@ -154,7 +154,7 @@ public class FriendConsumer extends AbstractVerticle {
                        status =2;
 
                    }
-                   long currentTime = Integer.valueOf(String.valueOf(System.currentTimeMillis()));
+                   long currentTime = Long.valueOf(String.valueOf(System.currentTimeMillis()));
 //统一
                    connection.update("update im_friend set `status` = "+status+" ,`modify_time`= "+currentTime+" where id = "+id,resultHandler ->{
                        if (resultHandler.succeeded()) {
@@ -326,6 +326,7 @@ public class FriendConsumer extends AbstractVerticle {
 
                                         if(re2.succeeded()){
                                             UpdateResult upResult = re2.result();
+
                                             int id = upResult.getKeys().getInteger(0);
                                             rep.setCode(200);
                                             sendMsg(friendUid,uid,id);
@@ -366,8 +367,8 @@ public class FriendConsumer extends AbstractVerticle {
         JsonObject msg = new JsonObject();
         msg.put("account",friendUid);
         msg.put("message",new JsonObject().put("type","subscribe").put("uid",uid).put("id",id).put("body","请求添加好友"));
-        String sql = "insert into im_subscribe (`from`,`to`,`time`,`f_id`,`nick`) " +
-                "values (?,?,?,?,?) ON DUPLICATE KEY UPDATE time = ? ,is_add=0";
+        String sql = "insert into im_subscribe (`from`,`to`,`time`,`nick`,`f_id`) " +
+                "values (?,?,?,?,?) ON DUPLICATE KEY UPDATE time = ? ,f_id=?,is_add=0";
         DButil.getJdbcClient().getConnection(res->{
             SQLConnection connection = res.result();
             connection.querySingle("select TU_ACC from app_user_inf where UID = '"+uid+"'",query ->{
@@ -376,7 +377,7 @@ public class FriendConsumer extends AbstractVerticle {
                 jsonArray.add(uid);
                 jsonArray.add(friendUid);
                 jsonArray.add(System.currentTimeMillis());
-                jsonArray.add(id);
+
                 String nick;
                 if (array!=null){
                      nick = array.getString(0);
@@ -384,7 +385,9 @@ public class FriendConsumer extends AbstractVerticle {
                     nick = uid;
                 }
                 jsonArray.add(nick);
+                jsonArray.add(id);
                 jsonArray.add(System.currentTimeMillis());
+                jsonArray.add(id);
                 DButil.getJdbcClient().getConnection(updateHan->{
                     SQLConnection updaetCon = updateHan.result();
                     updaetCon.updateWithParams(sql,jsonArray,re->{

@@ -3,6 +3,7 @@ package vertical;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServer;
+import io.vertx.ext.sql.SQLConnection;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.BodyHandler;
 import io.vertx.ext.web.handler.CorsHandler;
@@ -11,6 +12,7 @@ import rest.CommonRest;
 import rest.FileRest;
 import rest.FriendRest;
 import rest.MarkRest;
+import tool.DButil;
 
 public class RestApiVertical extends AbstractVerticle {
 
@@ -95,6 +97,22 @@ public class RestApiVertical extends AbstractVerticle {
         router.route(HttpMethod.GET,"/getMediaToken").handler(new CommonRest(vertx)::getMediaToken);
 
         httpServer.requestHandler(router::accept).listen(8081);
+
+
+        long timerID = vertx.setPeriodic(20000, id -> {
+
+            DButil.getJdbcClient().getConnection(res->{
+               if (res.succeeded()){
+                  final SQLConnection result = res.result();
+                  result.querySingle("select count(*) from im_message_last",handler->{
+                      if (handler.succeeded())
+                        logger.info("conneted to DB");
+                  });
+
+               }
+            });
+        });
+
 
 
     }

@@ -14,10 +14,10 @@ public class FastDFSClient {
 	static {
 		try {
 			//String filePath = new ClassPathResource("fdfs_client.conf").getFile().getAbsolutePath();;
-	        String configPath = FileUploadUtil.class.getClassLoader().getResource("fdfs_client.conf").getFile();
+	        //String configPath = FileUploadUtil.class.getClassLoader().getResource("fdfs_client.conf").getFile();
+			//FileUploadUtil.class.getClassLoader().getResourceAsStream("fdfs_client.conf");
 
-			
-			ClientGlobal.init(configPath);
+			ClientGlobal.init("fdfs_client.conf");
 		} catch (Exception e) {
 			logger.error("FastDFS Client Init Fail!",e);
 		}
@@ -34,7 +34,7 @@ public class FastDFSClient {
 		StorageClient storageClient=null;
 		try {
 			storageClient = getTrackerClient();
-			uploadResults = storageClient.upload_file(file.getContent(), file.getExt(), meta_list);
+			uploadResults = storageClient.upload_file(file.getContent  (), file.getExt(), meta_list);
 		} catch (IOException e) {
 			logger.error("IO Exception when uploadind the file:" + file.getName(), e);
 		} catch (Exception e) {

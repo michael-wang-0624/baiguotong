@@ -27,7 +27,12 @@ shadowJar {
     }
     mergeServiceFiles {
         include 'META-INF/services/io.vertx.core.spi.VerticleFactory'
+
+
     }
+
+
+
 }
 task "create-dirs" << {
     sourceSets*.java.srcDirs*.each {
@@ -37,6 +42,7 @@ task "create-dirs" << {
         it.mkdirs()
     }
 }
+
 configurations {
     quasar
 }
@@ -46,7 +52,7 @@ dependencies {
     compile fileTree (dir: 'lib', include: ['*.jar'])
     compile 'io.vertx:vertx-web:3.5.4'
     compile 'io.vertx:vertx-redis-client:3.5.2.CR3'
-    compile 'io.vertx:vertx-mysql-postgresql-client:3.5.4'
+    compile 'io.vertx:vertx-jdbc-client:3.5.4'
     compile 'org.slf4j:slf4j-api:1.7.12'
     compile 'org.slf4j:slf4j-simple:1.7.12'
     compile 'log4j:log4j:1.2.17'
@@ -54,18 +60,12 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-databind:2.1.0'
     compile 'com.fasterxml.jackson.core:jackson-annotations:2.1.0'
     compile 'mysql:mysql-connector-java:5.1.33'
-    compile 'io.vertx:vertx-auth-jdbc:3.5.4'
-    compile 'io.vertx:vertx-sync:3.5.4'
     compile 'io.vertx:vertx-rabbitmq-client:3.5.4'
     compile 'com.rabbitmq:amqp-client:5.4.1'
-    quasar  "co.paralleluniverse:quasar-core:0.8.0"
 }
 
 
-task runJava(type: JavaExec, dependsOn:[classes]) {
-    jvmArgs "-javaagent:${configurations.quasar.iterator().next()}"
 
-}
 
 tasks.withType(JavaCompile){
     options.encoding = "UTF-8"

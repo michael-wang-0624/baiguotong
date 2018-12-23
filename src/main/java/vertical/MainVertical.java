@@ -10,6 +10,7 @@ import model.DataReqRepMessageCover;
 import org.apache.log4j.Logger;
 import tool.DButil;
 import tool.RedisUtil;
+import tool.ResultSetCover;
 
 public class MainVertical extends AbstractVerticle {
     public static final Logger logger = Logger.getLogger(MainVertical.class);
@@ -23,10 +24,18 @@ public class MainVertical extends AbstractVerticle {
     @Override
     public void start() {
         try {
-            DButil.init(vertx,null);
-            RedisUtil.init(vertx,null);
-            vertx.eventBus().registerDefaultCodec(DataReqRepMessage.class, new DataReqRepMessageCover());
 
+            RedisUtil.init(vertx,null);
+             vertx.eventBus().registerDefaultCodec(DataReqRepMessage.class, new DataReqRepMessageCover());
+
+
+            vertx.deployVerticle(DButil.class.getName(),new DeploymentOptions().setWorker(true), re ->{
+                if(re.succeeded()) {
+                    System.out.println("success " + re.result());
+                } else  {
+                    System.out.println("failed " + re.cause());
+                }
+            });
             vertx.deployVerticle(RestApiVertical.class.getName(),new DeploymentOptions().setWorker(true),re ->{
                 if(re.succeeded()) {
                     System.out.println("success " + re.result());
@@ -34,6 +43,7 @@ public class MainVertical extends AbstractVerticle {
                     System.out.println("failed " + re.cause());
                 }
              });
+
 
             vertx.deployVerticle(FriendConsumer.class.getName(),new DeploymentOptions().setWorker(true), re ->{
                 if(re.succeeded()) {

@@ -56,7 +56,7 @@ public class CommonRest {
     }
 
     public void saveMessage(RoutingContext routeContext) {
-
+        logger.info("saveMessage");
         HttpServerRequest request = routeContext.request();
 
         String body = request.getParam("body");
@@ -77,14 +77,21 @@ public class CommonRest {
              .put("send_time",System.currentTimeMillis())
              .put("media",media)
              .put("voiceTime",voiceTime)   ;
-        logger.info(message.toString());
 
-        vertx.eventBus().send("saveMessage",message,re ->{
-            if (re.succeeded()) {
-                routeContext.response().putHeader("content-type", "application/json;charset=UTF-8")
-                        .end(Json.encodePrettily(new JsonObject().put("statusCode",200).put("body","消息保存成功")));
-            }
-        });
+        if (!from.equals(to)){
+            vertx.eventBus().send("saveMessage",message,re ->{
+                if (re.succeeded()) {
+                    routeContext.response().putHeader("content-type", "application/json;charset=UTF-8")
+                            .end(Json.encodePrettily(new JsonObject().put("statusCode",200).put("body","消息保存成功")));
+                }
+            });
+        } else {
+            routeContext.response().putHeader("content-type", "application/json;charset=UTF-8")
+                    .end(Json.encodePrettily(new JsonObject().put("statusCode",201).put("body","消息未保存")));
+
+        }
+
+
     }
 
     public void getUserDetail(RoutingContext routingContext) {
@@ -120,12 +127,13 @@ public class CommonRest {
                                             .end(Json.encodePrettily(new JsonObject().put("statusCode",200).put("body",resultBody)));
 
                                 }
+                                connection.close();
                             });
 
 
                         }) ;
                     }
-                    connection.close();
+
                 });
 
             });
@@ -142,38 +150,49 @@ public class CommonRest {
                 connection.querySingle("select TU_ACC,TU_SEX ,TU_ADDR , TU_MOBILE, TU_BIRTH  from app_user_inf where UID='"+uid+"'",handler->{
                     if(handler.succeeded()){
                         JsonArray result = handler.result();
+                        if (result !=null) {
+                            String addr = result.getString(2);
+                            String birth =result.getString(4);
 
-                        String addr = result.getString(2);
-                        String birth =result.getString(4);
+                            RedisUtil.redisClient_.get(uid+"_language",han->{
+                                String lan = han.result();
+                                RedisUtil.redisClient_.get("mark_"+uid,usernameHan->{
+                                    connection.close();
+                                    String username = result.getString(0);
+                                    if (usernameHan.succeeded()){
 
-                       RedisUtil.redisClient_.get(uid+"_language",han->{
-                           String lan = han.result();
-                           RedisUtil.redisClient_.get("mark_"+uid,usernameHan->{
-                               String username = result.getString(0);
-                               if (usernameHan.succeeded()){
-                                   String name = usernameHan.result();
-                                   if (name!=null) {
-                                       username= name;
-                                   }
-                                   JsonObject resultBody = new JsonObject()
-                                           .put("username",username)
-                                           .put("sex",result.getString(1))
-                                           .put("addr",addr==null ?"":addr)
-                                           .put("phoneNumber",result.getString(3))
-                                           .put("birth",birth==null?"":birth)
-                                           .put("token",token)
-                                           .put("language",lan==null?"":lan)
-                                           ;
-                                   routingContext.response().putHeader("content-type", "application/json;charset=UTF-8")
-                                           .end(Json.encodePrettily(new JsonObject().put("statusCode",200).put("body",resultBody)));
+                                        String name = usernameHan.result();
+                                        if (name!=null) {
+                                            username= name;
+                                        }
+                                        JsonObject resultBody = new JsonObject()
+                                                .put("username",username)
+                                                .put("sex",result.getString(1))
+                                                .put("addr",addr==null ?"":addr)
+                                                .put("phoneNumber",result.getString(3))
+                                                .put("birth",birth==null?"":birth)
+                                                .put("token",token)
+                                                .put("language",lan==null?"":lan)
+                                                ;
+                                        routingContext.response().putHeader("content-type", "application/json;charset=UTF-8")
+                                                .end(Json.encodePrettily(new JsonObject().put("statusCode",200).put("body",resultBody)));
 
-                               }
-                           });
+                                    }
+
+                                });
 
 
-                       }) ;
+                            }) ;
+                        } else {
+                            routingContext.response().putHeader("content-type", "application/json;charset=UTF-8")
+                                    .end(Json.encodePrettily(new JsonObject().put("statusCode",200).put("body", new JsonObject())));
+                            connection.close();
                         }
-                    connection.close();
+                    } else
+                    {
+                        logger.error(handler.cause().getMessage());
+                    }
+
                 });
 
             });
@@ -187,6 +206,7 @@ public class CommonRest {
     }
 
     public void getMessages(RoutingContext routeContext) {
+        logger.info("getMessage");
         HttpServerRequest request = routeContext.request();
         String pageNum = request.getParam("pageNum");
         String pageSize = request.getParam("pageSize");
@@ -194,22 +214,31 @@ public class CommonRest {
         String to = request.getParam("to");
         Integer isSelf = Integer.valueOf(request.getParam("isSelf"));
         List<Integer> minPageAndMaxPageNum = DButil.getMinPageAndMaxPageNum(pageNum, pageSize);
-        DButil.getJdbcClient().getConnection(res ->{
-            SQLConnection connection = res.result();
-            JsonArray jsonArray = new JsonArray();
-            if (isSelf!=null && isSelf==1) {
-                jsonArray.add(from);
-                jsonArray.add(to);
-            } else {
-                jsonArray.add(to);
-                jsonArray.add(from);
-            }
-            jsonArray.add(minPageAndMaxPageNum.get(0));
-            jsonArray.add(minPageAndMaxPageNum.get(1));
-            connection.queryWithParams("select * from im_message where `from` = ? and`to`= ?  order by send_time desc limit ?,?", jsonArray,re -> {
-                if (re.succeeded()) {
-                    ResultSet result = re.result();
-                    List<JsonObject> rows = result.getRows();
+
+
+            DButil.getJdbcClient().getConnection(res ->{
+
+
+                SQLConnection connection = res.result();
+                JsonArray jsonArray = new JsonArray();
+                if (isSelf!=null && isSelf==1) {
+                    jsonArray.add(from);
+                    jsonArray.add(to);
+                } else {
+                    jsonArray.add(to);
+                    jsonArray.add(from);
+                }
+                jsonArray.add(minPageAndMaxPageNum.get(0));
+                jsonArray.add(Integer.valueOf(pageSize));
+                logger.info(jsonArray.toString());
+
+                JsonObject ob = new JsonObject();
+                String sql = "select * from im_message where `from` = ? and `to`= ?  order by send_time desc limit ?,?";
+                ob.put("sql",sql).put("json",jsonArray);
+                vertx.eventBus().send("queryWithParams",ob,re ->{
+                    JsonArray result =  (JsonArray)re.result().body();
+
+                    List<JsonObject> rows = result.getList();;
 
                     Collections.sort(rows,new MessageComparator());
                     JsonArray jsonRows = new JsonArray(rows);
@@ -223,7 +252,23 @@ public class CommonRest {
                         count.add(from);
                     }
 
-                    DButil.getJdbcClient().getConnection(queryHan->{
+                    String countSql = "select count(*) from im_message where `from` = ? and `to`= ?";
+                    JsonObject ob1 = new JsonObject().put("sql", countSql).put("json", count);
+
+                    vertx.eventBus().send("querySingleWithParams",ob1,re1 ->{
+                        JsonArray jsonCount =  (JsonArray)re1.result().body();
+                        int integer = jsonCount.getInteger(0);
+                        Integer intSize = Integer.valueOf(pageSize);
+                        int total = integer % intSize == 0 ? (integer / intSize) : (integer / intSize) + 1;
+
+                        JsonObject rowsObj = new JsonObject().put("total",total).put("rows",jsonRows);
+
+                        routeContext.response().putHeader("content-type", "application/json;charset=UTF-8")
+                                .end(Json.encodePrettily(new JsonObject().put("statusCode",200).put("body",rowsObj)));
+
+
+                    });
+                 /*   DButil.getJdbcClient().getConnection(queryHan->{
                         SQLConnection sqlConnection = queryHan.result();
                         sqlConnection.querySingleWithParams(
                                 "select count(*) from im_message where `from` = ? and `to`= ?",count,queryHandler ->{
@@ -231,10 +276,7 @@ public class CommonRest {
                                     int integer = jsonCount.getInteger(0);
                                     Integer intSize = Integer.valueOf(pageSize);
                                     int total = integer % intSize == 0 ? (integer / intSize) : (integer / intSize) + 1;
-                                    sqlConnection.close();
-
                                     JsonObject rowsObj = new JsonObject().put("total",total).put("rows",jsonRows);
-
 
                                     routeContext.response().putHeader("content-type", "application/json;charset=UTF-8")
                                             .end(Json.encodePrettily(new JsonObject().put("statusCode",200).put("body",rowsObj)));
@@ -242,14 +284,57 @@ public class CommonRest {
 
                                 });
 
-                    });
+                    });*/
 
-                }
-                connection.close();
+                });
 
-            });
 
-        });
+
+
+                });
+
+                /*connection.queryWithParams("select * from im_message where `from` = ? and `to`= ?  order by send_time desc limit ?,?", jsonArray,re -> {
+                    if (re.succeeded()) {
+                        ResultSet result = re.result();
+                        List<JsonObject> rows = result.getRows();
+
+                        Collections.sort(rows,new MessageComparator());
+                        JsonArray jsonRows = new JsonArray(rows);
+
+                        JsonArray count = new JsonArray();
+                        if (isSelf!=null && isSelf==1) {
+                            count.add(from);
+                            count.add(to);
+                        } else {
+                            count.add(to);
+                            count.add(from);
+                        }
+
+                        DButil.getJdbcClient().getConnection(queryHan->{
+                            SQLConnection sqlConnection = queryHan.result();
+                            sqlConnection.querySingleWithParams(
+                                    "select count(*) from im_message where `from` = ? and `to`= ?",count,queryHandler ->{
+                                        JsonArray jsonCount = queryHandler.result();
+                                        int integer = jsonCount.getInteger(0);
+                                        Integer intSize = Integer.valueOf(pageSize);
+                                        int total = integer % intSize == 0 ? (integer / intSize) : (integer / intSize) + 1;
+                                        sqlConnection.close();
+
+                                        JsonObject rowsObj = new JsonObject().put("total",total).put("rows",jsonRows);
+
+                                        futher.complete();
+                                        routeContext.response().putHeader("content-type", "application/json;charset=UTF-8")
+                                                .end(Json.encodePrettily(new JsonObject().put("statusCode",200).put("body",rowsObj)));
+
+
+                                    });
+
+                        });
+
+                    }
+                    connection.close();
+
+                });*/
 
 
 
@@ -276,79 +361,94 @@ public class CommonRest {
         logger.info("talkList");
         HttpServerRequest request = routingContext.request();
         String uid = request.getParam("uid");
-        DButil.getJdbcClient().getConnection(res ->{
-            SQLConnection con = res.result();
-            JsonArray jsonArray = new JsonArray();
-            jsonArray.add(uid);
-            jsonArray.add(uid);
-            con.queryWithParams("select a.from,a.to ,a.msg_id  , a.modify_time,b.media,b.body,b.link from " +
-                    "im_message_last a join im_message  b on a.msg_id = b.id where a.from=? or a.to=? ",jsonArray,re ->{
+        vertx.executeBlocking(futher ->{
 
-                ResultSet resultSet = re.result();
-                List<JsonArray> results = resultSet.getResults();
-                List<Future> futureList = new ArrayList<>();
-                List<JsonObject> objectList = new ArrayList<JsonObject>();
-                con.close();
-                for (JsonArray result: results) {
-                    String from = result.getString(0);
-                    String to = result.getString(1);
-                    int id = result.getInteger(2);
-                    long time = result.getLong(3);
-                    String media = result.getString(4);
-                    String body = result.getString(5);
-                    String link = result.getString(6);
+            DButil.getJdbcClient().getConnection(res ->{
+                SQLConnection con = res.result();
+                JsonArray jsonArray = new JsonArray();
+                jsonArray.add(uid);
+                jsonArray.add(uid);
+                con.queryWithParams("select a.from,a.to ,a.msg_id  , a.modify_time,b.media,b.body,b.link from " +
+                        "im_message_last a join im_message  b on a.msg_id = b.id where a.from=? or a.to=? ",jsonArray,re ->{
+
+                    ResultSet resultSet = re.result();
+                    List<JsonArray> results = resultSet.getResults();
+                    List<Future> futureList = new ArrayList<>();
+                    List<JsonObject> objectList = new ArrayList<JsonObject>();
+                    con.close();
+                    for (JsonArray result: results) {
+                        String from = result.getString(0);
+                        String to = result.getString(1);
+                        int id = result.getInteger(2);
+                        long time = result.getLong(3);
+                        String media = result.getString(4);
+                        String body = result.getString(5);
+                        String link = result.getString(6);
 
 
-                    JsonObject json = new JsonObject()
-                            .put("uid",uid);
-                    if (from.equals(uid)) {
-                        json.put("friendUid",to);
-                    } else {
-                        json.put("friendUid",from);
-                    }
-                    Future future = Future.future();
-                    vertx.eventBus().send("getFriendUid",json,re2 ->{
-                        if(re.succeeded()) {
-                            String nick = (String )re2.result().body();
-                            String target = "";
-                            if(from.equals(uid)) {
-                                target = to;
-                            } else {
-                                target = from;
+                        JsonObject json = new JsonObject()
+                                .put("uid",uid);
+                        if (from.equals(uid)) {
+                            json.put("friendUid",to);
+                        } else {
+                            json.put("friendUid",from);
+                        }
+                        Future future = Future.future();
+                        vertx.eventBus().send("getFriendUid",json,re2 ->{
+                            if(re.succeeded()) {
+                                String nick = (String )re2.result().body();
+                                String target = "";
+                                if(from.equals(uid)) {
+                                    target = to;
+                                } else {
+                                    target = from;
+                                }
+
+                                int type ;
+
+                                if (uid.equals(from)) {
+                                    type = 1;
+                                } else {
+                                    type = 0;
+                                }
+
+                                JsonObject bodyJson = new JsonObject()
+                                        .put("id",id)
+                                        .put("target",target)
+                                        .put("time",time)
+                                        .put("media",media)
+                                        .put("body",body)
+                                        .put("link",link)
+                                        .put("nick",nick).put("type",type);
+                                objectList.add(bodyJson);
+                                future.complete();
                             }
+                        });
+                        futureList.add(future);
+                    }
 
-                            JsonObject bodyJson = new JsonObject()
-                                    .put("id",id)
-                                    .put("target",target)
-                                    .put("time",time)
-                                    .put("media",media)
-                                    .put("body",body)
-                                    .put("link",link)
-                                    .put("nick",nick);
-                            objectList.add(bodyJson);
-                            future.complete();
+                    CompositeFuture.all(futureList).setHandler(rpv->{
+                        if(rpv.succeeded()){
+                            JsonObject ll = new JsonObject();
+                            ll.put("body",objectList);
+                            ll.put("statusCode",200);
+                            futher.complete();
+                            routingContext.response().putHeader("content-type", "application/json;charset=UTF-8")
+                                    .end(Json.encodePrettily(ll));
                         }
                     });
-                    futureList.add(future);
-                }
 
-                CompositeFuture.all(futureList).setHandler(rpv->{
-                    if(rpv.succeeded()){
-                        JsonObject ll = new JsonObject();
-                        ll.put("body",objectList);
-                        ll.put("statusCode",200);
-                        routingContext.response().putHeader("content-type", "application/json;charset=UTF-8")
-                                .end(Json.encodePrettily(ll));
-                    }
+
+
+
                 });
 
 
-
-
             });
-
-
+        },res->{
+            logger.info("talk list success");
         });
+
 
 
 

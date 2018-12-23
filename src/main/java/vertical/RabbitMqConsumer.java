@@ -62,6 +62,7 @@ public class RabbitMqConsumer extends AbstractVerticle {
                         {
                             try {
                                 String message = new String(body, "utf-8");
+
                                 JsonObject jsonObject = new JsonObject(message);
 
                                 DButil.getJdbcClient().getConnection(res -> {
@@ -108,60 +109,64 @@ public class RabbitMqConsumer extends AbstractVerticle {
 
                                                     logger.debug(json);
 
-                                                    DButil.getJdbcClient().getConnection(insert ->{
-                                                        SQLConnection result2 = insert.result();
-                                                        result2.updateWithParams(sql, json, re1 -> {
-                                                            if (re1.failed()) {
-                                                                re1.cause().printStackTrace();
+                                                    if (!from.equals(to)) {
 
-                                                            } else {
-                                                                DButil.getJdbcClient().getConnection(selectIdHan->{
-                                                                    SQLConnection selectCon = selectIdHan.result();
-                                                                    selectCon.querySingle("select id from im_message where `message_id`='" + message_id + "'", handler -> {
-                                                                        if (handler.succeeded()) {
-                                                                            Integer id = handler.result().getInteger(0);
-                                                                            JsonArray array = new JsonArray()
-                                                                                    .add(id)
-                                                                                    .add(System.currentTimeMillis())
-                                                                                    .add(from)
-                                                                                    .add(to)
-                                                                                    .add(String.valueOf(mixId));
+                                                        DButil.getJdbcClient().getConnection(insert ->{
+                                                            SQLConnection result2 = insert.result();
+                                                            result2.updateWithParams(sql, json, re1 -> {
+                                                                if (re1.failed()) {
+                                                                    re1.cause().printStackTrace();
 
-                                                                            //update im_message_last set `msg_id`=? ,`modify_time`=? ,`from` =? ,`to`=? where `mix_id`=?
-                                                                            DButil.getJdbcClient().getConnection(updatLastHan ->{
-                                                                                SQLConnection updateLastCon = updatLastHan.result();
-                                                                                updateLastCon.updateWithParams(updateLastMessage, array, handler1 -> {
-                                                                                    if (handler1.failed()) {
-                                                                                        logger.error(handler1.cause());
+                                                                } else {
+                                                                    DButil.getJdbcClient().getConnection(selectIdHan->{
+                                                                        SQLConnection selectCon = selectIdHan.result();
+                                                                        selectCon.querySingle("select id from im_message where `message_id`='" + message_id + "'", handler -> {
+                                                                            if (handler.succeeded()) {
+                                                                                Integer id = handler.result().getInteger(0);
+                                                                                JsonArray array = new JsonArray()
+                                                                                        .add(id)
+                                                                                        .add(System.currentTimeMillis())
+                                                                                        .add(from)
+                                                                                        .add(to)
+                                                                                        .add(String.valueOf(mixId));
 
-                                                                                    } else {
-                                                                                        UpdateResult result1 = handler1.result();
-                                                                                        int updated = result1.getUpdated();
-                                                                                        if (Integer.valueOf(updated) == 0) {
-                                                                                            insertmessagelast(id, from, to, String.valueOf(mixId));
+                                                                                //update im_message_last set `msg_id`=? ,`modify_time`=? ,`from` =? ,`to`=? where `mix_id`=?
+                                                                                DButil.getJdbcClient().getConnection(updatLastHan ->{
+                                                                                    SQLConnection updateLastCon = updatLastHan.result();
+                                                                                    updateLastCon.updateWithParams(updateLastMessage, array, handler1 -> {
+                                                                                        if (handler1.failed()) {
+                                                                                            logger.error(handler1.cause());
+
+                                                                                        } else {
+                                                                                            UpdateResult result1 = handler1.result();
+                                                                                            int updated = result1.getUpdated();
+                                                                                            if (Integer.valueOf(updated) == 0) {
+                                                                                                insertmessagelast(id, from, to, String.valueOf(mixId));
+                                                                                            }
+
+
                                                                                         }
+                                                                                        updateLastCon.close();
 
-
-                                                                                    }
-                                                                                    updateLastCon.close();
-
+                                                                                    });
                                                                                 });
-                                                                            });
 
 
 
-                                                                        }
-                                                                        selectCon.close();
+                                                                            }
+                                                                            selectCon.close();
+                                                                        });
                                                                     });
-                                                                });
 
 
 
-                                                            }
-                                                            result2.close();
+                                                                }
+                                                                result2.close();
+                                                            });
+
                                                         });
+                                                    }
 
-                                                    });
 
 
 

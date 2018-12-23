@@ -176,8 +176,8 @@ public class FriendRest {
             connection.queryWithParams(" SELECT user_id1,user_id2  FROM im_friend WHERE user_id1= ? AND `status`=1 UNION ALL" +
                     "   SELECT user_id1,user_id2  FROM im_friend WHERE user_id2= ? AND `status`=1",parm,re ->{
                 ResultSet result = re.result();
-                connection.close();
                 List<JsonArray> results = result.getResults();
+                connection.close();
                 List objectList = new ArrayList<JsonObject>();
                 List<Future> futureList = new ArrayList<>();
                 for (JsonArray jsonArray:results) {

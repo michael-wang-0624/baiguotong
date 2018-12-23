@@ -53,12 +53,11 @@ public class MarkConsumer extends AbstractVerticle {
                                                 });
 
                                             }
+                                            connection.close();
+
                                         });
                                     }
                                 });
-
-
-
                             }
 
                         });

@@ -10,13 +10,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class SignalingToken {
-    private static final String appId = "20aec784743645a6a48d0c2fdccc381d";
+    private static final String appId =    "20aec784743645a6a48d0c2fdccc381d";
     private static final String app_cert = "addf4632548246b585ac5e640bf323dd";
-
-    //private static final String appId = "20aec784743645a6a48d0c2fdccc381d";
-    //private static final String app_cert = "addf4632548246b585ac5e640bf323dd";
-
-
     public static String getToken(   String account) throws NoSuchAlgorithmException {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd");
         Calendar cal = null;
