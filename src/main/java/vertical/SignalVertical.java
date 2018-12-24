@@ -11,24 +11,22 @@ import tool.SignalingToken;
 
 public class SignalVertical extends AbstractVerticle {
     private static final Logger logger = Logger.getLogger(SignalVertical.class);
-    private static final String appId = "20aec784743645a6a48d0c2fdccc381d";
+    private static final String appId = "555edf3e03ad48ff94cf1c234be2287d";
+    
+    
     @Override
     public void start() throws Exception {
         //
         Signal signal = new Signal(appId);
         // 登录 Agora 信令系统
-
-
-        String token = SignalingToken.getToken(  "1");
-
-
-        login(signal, token);
+        //String token = SignalingToken.getToken(  "100");
+        login(signal);
 
 
     }
 
-    public void login(Signal signal, String token) {
-        signal.login("1", token, new Signal.LoginCallback() {
+    public void login(Signal signal) {
+        signal.login("100", null, new Signal.LoginCallback() {
             MessageConsumer<Object> consumer = vertx.eventBus().consumer("subscribe");
 
             @Override
@@ -67,7 +65,7 @@ public class SignalVertical extends AbstractVerticle {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                login(signal,token);
+                login(signal );
             }
 
             @Override
@@ -80,7 +78,7 @@ public class SignalVertical extends AbstractVerticle {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                login(signal,token);
+                login(signal);
             }
 
             @Override
@@ -94,7 +92,7 @@ public class SignalVertical extends AbstractVerticle {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                login(signal,token);
+                login(signal);
 
             }
         });

@@ -29,54 +29,18 @@ public class MainVertical extends AbstractVerticle {
              vertx.eventBus().registerDefaultCodec(DataReqRepMessage.class, new DataReqRepMessageCover());
 
 
-            vertx.deployVerticle(DButil.class.getName(),new DeploymentOptions().setWorker(true), re ->{
-                if(re.succeeded()) {
-                    System.out.println("success " + re.result());
-                } else  {
-                    System.out.println("failed " + re.cause());
-                }
-            });
-            vertx.deployVerticle(RestApiVertical.class.getName(),new DeploymentOptions().setWorker(true),re ->{
-                if(re.succeeded()) {
-                    System.out.println("success " + re.result());
-                } else  {
-                    System.out.println("failed " + re.cause());
-                }
-             });
+            vertx.deployVerticle(DButil.class.getName());
+            vertx.deployVerticle(RestApiVertical.class.getName(),new DeploymentOptions().setWorker(true));
 
 
-            vertx.deployVerticle(FriendConsumer.class.getName(),new DeploymentOptions().setWorker(true), re ->{
-                if(re.succeeded()) {
-                    System.out.println("success " + re.result());
-                } else  {
-                    System.out.println("failed " + re.cause());
-                }
-            });
+            vertx.deployVerticle(FriendConsumer.class.getName(),new DeploymentOptions().setWorker(true));
 
-            vertx.deployVerticle(MarkConsumer.class.getName(),new DeploymentOptions().setWorker(true),re -> {
-                if(re.succeeded()) {
-                    System.out.println("success " + re.result());
-                } else  {
-                    System.out.println("failed " + re.cause());
-                }
-            });
+            vertx.deployVerticle(MarkConsumer.class.getName(),new DeploymentOptions().setWorker(true));
 
-            vertx.deployVerticle(RabbitMqConsumer.class.getName(),new DeploymentOptions().setWorker(true),re -> {
-                if(re.succeeded()) {
-                    System.out.println("success " + re.result());
-                } else  {
-                    System.out.println("failed " + re.cause());
-                }
-
-            });
-            vertx.deployVerticle(RabbiMqStart.class.getName(),new DeploymentOptions().setWorker(true),re -> {
-                if(re.succeeded()) {
-                    System.out.println("success " + re.result());
-                } else  {
-                    System.out.println("failed " + re.cause());
-                }
-
-            });
+            vertx.deployVerticle(RabbitMqConsumer.class.getName(),new DeploymentOptions().setWorker(true));
+            vertx.deployVerticle(RabbiMqStart.class.getName(),new DeploymentOptions().setWorker(true));
+            vertx.deployVerticle(SignalVertical.class.getName(),new  DeploymentOptions().setWorker(true));
+            
         } catch (Exception e) {
             logger.error("启动服务失败!");
         }

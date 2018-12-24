@@ -367,6 +367,8 @@ public class FriendConsumer extends AbstractVerticle {
         JsonObject msg = new JsonObject();
         msg.put("account",friendUid);
         msg.put("message",new JsonObject().put("type","subscribe").put("uid",uid).put("id",id).put("body","请求添加好友"));
+        vertx.eventBus().send("subscribe", msg);
+        
         String sql = "insert into im_subscribe (`from`,`to`,`time`,`nick`,`f_id`) " +
                 "values (?,?,?,?,?) ON DUPLICATE KEY UPDATE time = ? ,f_id=?,is_add=0";
         DButil.getJdbcClient().getConnection(res->{

@@ -8,7 +8,6 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.sql.SQLConnection;
 import io.vertx.ext.sql.UpdateResult;
 import org.apache.log4j.Logger;
-import sun.security.pkcs11.Secmod;
 import tool.DButil;
 
 import java.io.IOException;
