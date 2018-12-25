@@ -21,9 +21,9 @@ public class RabbitMqConsumer extends AbstractVerticle {
 
     private Connection connection;
     private Channel channel = null;
-    private static final String exchangeName = "message-exchange";
-    private static final String queueName = "message-queue";
-    private static final String routingKey = "message-routing";
+    private static final String exchangeName = "message-exchange_";
+    private static final String queueName = "message-queue_";
+    private static final String routingKey = "message-routing_";
     private static final String updateLastMessage = "update im_message_last set `msg_id`=? ,`modify_time`=? ,`from` =? ,`to`=? where `mix_id`=?";
     private static final String insertLastMessage = "insert into im_message_last (`msg_id`,`from`,`to`,`mix_id`,`modify_time`) values (?,?,?,?,?)";
     private WorkerExecutor executor;
@@ -61,8 +61,14 @@ public class RabbitMqConsumer extends AbstractVerticle {
                         {
                             try {
                                 String message = new String(body, "utf-8");
-
+                                long deliveryTag = envelope.getDeliveryTag();
+                                try {
+                                    channel.basicAck(deliveryTag, false);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
                                 JsonObject jsonObject = new JsonObject(message);
+                                logger.debug(jsonObject);
 
                                 DButil.getJdbcClient().getConnection(res -> {
                                     if (res.succeeded()) {
@@ -73,12 +79,6 @@ public class RabbitMqConsumer extends AbstractVerticle {
                                         String sqlQuery = "select count(*) from im_message where message_id= '" + message_id + "'";
                                         connection.querySingle(sqlQuery, re -> {
                                             if (re.succeeded()) {
-                                                long deliveryTag = envelope.getDeliveryTag();
-                                                try {
-                                                    channel.basicAck(deliveryTag, false);
-                                                } catch (IOException e) {
-                                                    e.printStackTrace();
-                                                }
                                                 JsonArray result = re.result();
                                                 Integer integer = result.getInteger(0);
                                                 if (integer == 0) {
@@ -106,7 +106,7 @@ public class RabbitMqConsumer extends AbstractVerticle {
                                                             .add(String.valueOf(mixId))
                                                             .add(jsonObject.getInteger("voiceTime"));
 
-                                                    logger.debug(json);
+                                                    
 
                                                     if (!from.equals(to)) {
 

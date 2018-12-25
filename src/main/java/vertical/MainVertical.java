@@ -27,16 +27,10 @@ public class MainVertical extends AbstractVerticle {
 
             RedisUtil.init(vertx,null);
              vertx.eventBus().registerDefaultCodec(DataReqRepMessage.class, new DataReqRepMessageCover());
-
-
             vertx.deployVerticle(DButil.class.getName());
             vertx.deployVerticle(RestApiVertical.class.getName(),new DeploymentOptions().setWorker(true));
-
-
             vertx.deployVerticle(FriendConsumer.class.getName(),new DeploymentOptions().setWorker(true));
-
             vertx.deployVerticle(MarkConsumer.class.getName(),new DeploymentOptions().setWorker(true));
-
             vertx.deployVerticle(RabbitMqConsumer.class.getName(),new DeploymentOptions().setWorker(true));
             vertx.deployVerticle(RabbiMqStart.class.getName(),new DeploymentOptions().setWorker(true));
             vertx.deployVerticle(SignalVertical.class.getName(),new  DeploymentOptions().setWorker(true));

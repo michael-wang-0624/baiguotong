@@ -269,8 +269,8 @@ public class FriendConsumer extends AbstractVerticle {
                             if(array !=null) {
                                 int id = array.getInteger(0);
                                 int status = array.getInteger(1);
-                                int request = array.getInteger(2);
-                                boolean request_bool = request == 0 ? false :true;
+                                boolean request_bool = array.getBoolean(2);
+                               // boolean request_bool = request == 0 ? false :true;
                                 if (status == 1) {
                                     rep.setCode(200);
                                     rep.setObj(new JsonObject().put("body","已经是好友关系了"));

@@ -99,21 +99,6 @@ public class RestApiVertical extends AbstractVerticle {
         router.route(HttpMethod.GET,"/getMediaToken").handler(new CommonRest(vertx)::getMediaToken);
 
         httpServer.requestHandler(router::accept).listen(8081);
-        
-        vertx.setPeriodic(30000, handler->{
-        	DButil.getJdbcClient().getConnection(res->{
-        		SQLConnection result = res.result();
-        		result.querySingle("select 1", resultHandler->{
-        			  
-					JsonArray array = resultHandler.result();
-    
-        			logger.info(array.getInteger(0)+"  heartbeat connected");
-        			result.close();
-        		});
-        		
-        		
-        	});
-        });
 
     }
 

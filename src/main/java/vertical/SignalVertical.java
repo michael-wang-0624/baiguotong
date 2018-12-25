@@ -19,14 +19,14 @@ public class SignalVertical extends AbstractVerticle {
         //
         Signal signal = new Signal(appId);
         // 登录 Agora 信令系统
-        //String token = SignalingToken.getToken(  "100");
+        //String token = SignalingToken.getToken(  "101");
         login(signal);
 
 
     }
 
     public void login(Signal signal) {
-        signal.login("100", null, new Signal.LoginCallback() {
+        signal.login("10", "_no_need_token", new Signal.LoginCallback() {
             MessageConsumer<Object> consumer = vertx.eventBus().consumer("subscribe");
 
             @Override

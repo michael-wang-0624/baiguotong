@@ -220,12 +220,8 @@ public class CommonRest {
         String to = request.getParam("to");
         Integer isSelf = Integer.valueOf(request.getParam("isSelf"));
         List<Integer> minPageAndMaxPageNum = DButil.getMinPageAndMaxPageNum(pageNum, pageSize);
-
-
-            DButil.getJdbcClient().getConnection(res ->{
-
-
-                SQLConnection connection = res.result();
+           // DButil.getJdbcClient().getConnection(res ->{
+                //SQLConnection connection = res.result();
                 JsonArray jsonArray = new JsonArray();
                 if (isSelf!=null && isSelf==1) {
                     jsonArray.add(from);
@@ -274,74 +270,15 @@ public class CommonRest {
 
 
                     });
-                 /*   DButil.getJdbcClient().getConnection(queryHan->{
-                        SQLConnection sqlConnection = queryHan.result();
-                        sqlConnection.querySingleWithParams(
-                                "select count(*) from im_message where `from` = ? and `to`= ?",count,queryHandler ->{
-                                    JsonArray jsonCount = queryHandler.result();
-                                    int integer = jsonCount.getInteger(0);
-                                    Integer intSize = Integer.valueOf(pageSize);
-                                    int total = integer % intSize == 0 ? (integer / intSize) : (integer / intSize) + 1;
-                                    JsonObject rowsObj = new JsonObject().put("total",total).put("rows",jsonRows);
-
-                                    routeContext.response().putHeader("content-type", "application/json;charset=UTF-8")
-                                            .end(Json.encodePrettily(new JsonObject().put("statusCode",200).put("body",rowsObj)));
-
-
-                                });
-
-                    });*/
+             
 
                 });
 
 
 
 
-                });
-
-                /*connection.queryWithParams("select * from im_message where `from` = ? and `to`= ?  order by send_time desc limit ?,?", jsonArray,re -> {
-                    if (re.succeeded()) {
-                        ResultSet result = re.result();
-                        List<JsonObject> rows = result.getRows();
-
-                        Collections.sort(rows,new MessageComparator());
-                        JsonArray jsonRows = new JsonArray(rows);
-
-                        JsonArray count = new JsonArray();
-                        if (isSelf!=null && isSelf==1) {
-                            count.add(from);
-                            count.add(to);
-                        } else {
-                            count.add(to);
-                            count.add(from);
-                        }
-
-                        DButil.getJdbcClient().getConnection(queryHan->{
-                            SQLConnection sqlConnection = queryHan.result();
-                            sqlConnection.querySingleWithParams(
-                                    "select count(*) from im_message where `from` = ? and `to`= ?",count,queryHandler ->{
-                                        JsonArray jsonCount = queryHandler.result();
-                                        int integer = jsonCount.getInteger(0);
-                                        Integer intSize = Integer.valueOf(pageSize);
-                                        int total = integer % intSize == 0 ? (integer / intSize) : (integer / intSize) + 1;
-                                        sqlConnection.close();
-
-                                        JsonObject rowsObj = new JsonObject().put("total",total).put("rows",jsonRows);
-
-                                        futher.complete();
-                                        routeContext.response().putHeader("content-type", "application/json;charset=UTF-8")
-                                                .end(Json.encodePrettily(new JsonObject().put("statusCode",200).put("body",rowsObj)));
-
-
-                                    });
-
-                        });
-
-                    }
-                    connection.close();
-
-                });*/
-
+               //});
+ 
 
 
 
@@ -375,7 +312,7 @@ public class CommonRest {
                 jsonArray.add(uid);
                 jsonArray.add(uid);
                 con.queryWithParams("select a.from,a.to ,a.msg_id  , a.modify_time,b.media,b.body,b.link from " +
-                        "im_message_last a join im_message  b on a.msg_id = b.id where a.from=? or a.to=? ",jsonArray,re ->{
+                        "im_message_last a join im_message  b on a.msg_id = b.id where a.from=? or a.to=? order by a.modify_time desc",jsonArray,re ->{
 
                     ResultSet resultSet = re.result();
                     List<JsonArray> results = resultSet.getResults();

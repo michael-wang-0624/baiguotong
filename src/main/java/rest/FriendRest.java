@@ -122,7 +122,6 @@ public class FriendRest {
             SQLConnection connection = res.result();
             connection.query("select * from im_subscribe where `to` = '"+uid+"' and `is_add` <> 1 ",re->{
                 ResultSet result = re.result();
-
                 JsonObject ll = new JsonObject();
                 if(re.succeeded()) {
                     ll.put("statusCode",200);
@@ -132,6 +131,7 @@ public class FriendRest {
                 } else {
                     ll.put("statusCode",201);
                 }
+                connection.close();
                 routeContext.response().putHeader("content-type", "application/json;charset=UTF-8")
                         .end(Json.encodePrettily(ll));
             });
