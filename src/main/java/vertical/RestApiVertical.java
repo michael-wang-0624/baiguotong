@@ -3,10 +3,13 @@ package vertical;
 import org.apache.log4j.Logger;
 
 import io.vertx.core.AbstractVerticle;
+import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServer;
-import io.vertx.core.json.JsonArray;
-import io.vertx.ext.sql.SQLConnection;
+import io.vertx.core.http.HttpServerResponse;
+import io.vertx.core.json.Json;
+import io.vertx.core.json.JsonObject;
+import io.vertx.ext.web.Route;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.BodyHandler;
 import io.vertx.ext.web.handler.CorsHandler;
@@ -14,7 +17,6 @@ import rest.CommonRest;
 import rest.FileRest;
 import rest.FriendRest;
 import rest.MarkRest;
-import tool.DButil;
 
 public class RestApiVertical extends AbstractVerticle {
 
@@ -46,10 +48,16 @@ public class RestApiVertical extends AbstractVerticle {
         9、语音留言文件下载
         10、聊天记录**/
 
+        router.get("/hello").handler(context -> {
+            Integer.parseInt(context.request().getParam("age"));
+            context.response().end("hello vert.x");
+        }).failureHandler(context -> {
+            context.response().end("Route internal error process");
+        });
        // router.route("/register")
         router.route(HttpMethod.POST,"/upload").handler(new FileRest(vertx)::savePhoto);
 
-        router.route(HttpMethod.POST,"/uploadFile").handler(new FileRest(vertx)::uploadFile);
+        router.route(HttpMethod.POST,"/saveHeadImage").handler(new FileRest(vertx)::saveHeadImage);
         //添加好友
         router.route(HttpMethod.POST,"/addFriends").handler(new FriendRest(vertx)::addFriend);
 
@@ -81,13 +89,18 @@ public class RestApiVertical extends AbstractVerticle {
 
         //分页获取聊天记录
         router.route(HttpMethod.GET,"/getMessages").handler(new CommonRest(vertx)::getMessages);
+        
+        //分页获取对话记录
+        router.route(HttpMethod.GET,"/getHistoryMessage").handler(new CommonRest(vertx)::getHistoryMessage);
 
         //根据日期获取聊天记录
         router.route(HttpMethod.GET,"/searchMessages").handler(new CommonRest(vertx)::searchMessages);
 
         //获取聊天消息列表
-        router.route(HttpMethod.GET,"/talkList").handler((new CommonRest(vertx)::talkList));
-
+        router.route(HttpMethod.GET,"/talkList").handler((new CommonRest(vertx)::talkList)).failureHandler(failureHandler->{
+        	System.out.println("dddddddddd");
+        });
+        
         router.route(HttpMethod.GET,"/getToken").handler(new CommonRest(vertx)::getToken);
         router.route(HttpMethod.GET,"/getUserDetail").handler(new CommonRest(vertx)::getUserDetail);
 
@@ -97,6 +110,21 @@ public class RestApiVertical extends AbstractVerticle {
         router.route(HttpMethod.GET,"/getAddFriendList").handler(new FriendRest(vertx)::getAddFriendList);
 
         router.route(HttpMethod.GET,"/getMediaToken").handler(new CommonRest(vertx)::getMediaToken);
+        
+   /*     Route route = router.get("/talkList");
+
+        route.failureHandler(frc -> {
+     
+        	frc.response().putHeader("content-type", "application/json;charset=UTF-8")
+            .end(Json.encodePrettily(new JsonObject().put("statusCode",500).put("body","error")));
+        });*/
+        
+        vertx.exceptionHandler(new Handler<Throwable>() {  
+            @Override 
+            public void handle(Throwable event) { 
+              
+            }
+        });
 
         httpServer.requestHandler(router::accept).listen(8081);
 

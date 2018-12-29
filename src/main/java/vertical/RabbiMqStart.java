@@ -10,9 +10,9 @@ import io.vertx.core.json.JsonObject;
 public class RabbiMqStart extends AbstractVerticle {
     private Connection connection ;
     private Channel channel = null;
-    private static final String exchangeName = "message-exchange_";
-    private static final String queueName = "message-queue_";
-    private static final String routingKey = "message-routing_";
+    private static final String exchangeName = "message-exchange_new";
+    private static final String queueName = "message-queue_new";
+    private static final String routingKey = "message-routing_new";
 
     @Override
     public void start() throws Exception {

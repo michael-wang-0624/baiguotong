@@ -14,13 +14,17 @@ import model.BusMessage;
 import model.DataReqRepMessage;
 import org.apache.log4j.Logger;
 import tool.DButil;
+import tool.RedisUtil;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 
 public class FriendRest {
 
     private static final Logger logger = Logger.getLogger(FileRest.class);
+    private static final String  sql = "select UID from app_user_inf where TU_MOBILE = ? OR TU_ACC =? OR IM_MARK=?";  
     private Vertx vertx;
 
     public FriendRest(Vertx vertx) {
@@ -59,9 +63,9 @@ public class FriendRest {
         logger.info("searchFriend");
         HttpServerRequest request = routeContext.request();
 
-        String phoneNumber = request.getParam("phoneNumber");
+        String keywords = request.getParam("keywords");
         String uid = request.getParam("uid");
-        vertx.eventBus().send("searchFriend",new JsonObject().put("phoneNumber",phoneNumber).put("uid",uid),re ->{
+        vertx.eventBus().send("searchFriend",new JsonObject().put("keywords",keywords).put("uid",uid),re ->{
            if(re.succeeded()) {
                routeContext.response().setChunked(true);
                logger.info(re.result().body());
@@ -118,22 +122,57 @@ public class FriendRest {
         logger.info("getAddFriendList");
         HttpServerRequest request = routeContext.request();
         String uid = request.getParam("uid");
+        String keywords = request.getParam("keywords");
+        String apped ="AND (b.TU_ACC='"+keywords+"' OR b.TU_MOBILE='"+keywords+"' OR B.IM_MARK='"+keywords+"')";
         DButil.getJdbcClient().getConnection(res->{
             SQLConnection connection = res.result();
-            connection.query("select * from im_subscribe where `to` = '"+uid+"' and `is_add` <> 1 ",re->{
+            
+            String sql = "SELECT a.* FROM im_subscribe a JOIN app_user_inf b ON a.`from` =b.UID WHERE "
+            		+ "a.`to` = '"+uid+"' AND a.`is_add` <> 1 ";
+            
+            if(keywords!=null) {
+            	sql += apped;
+            }
+            
+            connection.query(sql,re->{
                 ResultSet result = re.result();
                 JsonObject ll = new JsonObject();
                 if(re.succeeded()) {
                     ll.put("statusCode",200);
                     List<JsonObject> rows = result.getRows();
-                    JsonArray output = new JsonArray(rows);
-                    ll.put("body",output);
+                    Iterator<JsonObject> iterator = rows.iterator();
+                    List<Future> futureList = new ArrayList<>();
+                    while(iterator.hasNext()) {
+                    	Future future = Future.future();
+                    	futureList.add(future);
+                    	JsonObject next = iterator.next();
+                    	String from = next.getString("from");
+                    	  String key = "headImage_"+from;
+                          RedisUtil.redisClient_.get(key, headHandler->{
+                        	  String headImage = headHandler.result();
+                        	  next.put("headImage", headImage==null?"":headImage);
+                        	  future.complete();
+                        	  
+                          });
+                    }
+                    
+                    CompositeFuture.all(futureList).setHandler(rpv->{
+                        if(rpv.succeeded()){
+                        	JsonArray output = new JsonArray(rows);
+                            ll.put("body",output);
+                            routeContext.response().putHeader("content-type", "application/json;charset=UTF-8")
+                            .end(Json.encodePrettily(ll));
+                        }
+                    });
+                    
+                    
                 } else {
                     ll.put("statusCode",201);
+                    routeContext.response().putHeader("content-type", "application/json;charset=UTF-8")
+                    .end(Json.encodePrettily(ll));
                 }
                 connection.close();
-                routeContext.response().putHeader("content-type", "application/json;charset=UTF-8")
-                        .end(Json.encodePrettily(ll));
+                
             });
         });
 
@@ -169,6 +208,7 @@ public class FriendRest {
     public  void getFriendList(RoutingContext routingContext) {
         logger.info("getFriendList");
         HttpServerRequest request = routingContext.request();
+        String keywords = request.getParam("keywords");
         String uid = request.getParam("uid");
         DButil.getJdbcClient().getConnection(res->{
             SQLConnection connection = res.result();
@@ -196,19 +236,62 @@ public class FriendRest {
                             JsonObject bodyJson = new JsonObject()
                                     .put("id",friendUid)
                                     .put("nick",nick);
-                            objectList.add(bodyJson);
-                            future.complete();
+                            
+                            String key = "headImage_"+friendUid;
+                            RedisUtil.redisClient_.get(key, headHandler->{
+                          	  String headImage = headHandler.result();
+                          	  bodyJson.put("headImage", headImage==null?"":headImage);
+                          	  objectList.add(bodyJson);
+                              future.complete();
+                            });
+                            
                         }
                     });
                     futureList.add(future);
                 }
                 CompositeFuture.all(futureList).setHandler(rpv->{
                     if(rpv.succeeded()){
-                        JsonObject ll = new JsonObject();
-                        ll.put("body",objectList);
-                        ll.put("statusCode",200);
-                        routingContext.response().putHeader("content-type", "application/json;charset=UTF-8")
-                                .end(Json.encodePrettily(ll));
+                    	if(keywords !=null) {
+                    		DButil.getJdbcClient().getConnection(handler->{
+                    			SQLConnection fliterCon = handler.result();
+                    			fliterCon.queryWithParams(sql, 
+                    					new JsonArray().add(keywords).add(keywords).add(keywords), 
+                    						resultHandler->{
+                    							ResultSet resultHandlerResult = resultHandler.result();
+                    							List<JsonArray> uids = resultHandlerResult.getResults();
+                    							HashSet<String> lists = new HashSet<>();
+                    							for(JsonArray array :uids) {
+                    								String uid_array = array.getString(0);
+                    								lists.add(uid_array);
+                    							}
+                    							
+                    							Iterator<JsonObject> iterator = objectList.iterator();
+                                        		while(iterator.hasNext()) {
+                                        			JsonObject json = iterator.next();
+                                        			String id = json.getString("id");
+                                        			if (!lists.contains(id)) {
+                                        				iterator.remove();
+                                        			}
+                                        			
+                                        		}
+                                        		JsonObject ll = new JsonObject();
+                                                ll.put("body",objectList);
+                                                ll.put("statusCode",200);
+                                                routingContext.response().putHeader("content-type", "application/json;charset=UTF-8")
+                                                        .end(Json.encodePrettily(ll));
+                    							fliterCon.close();
+                    						});
+                    		});
+                    		
+                    	} else {
+                    		
+                    		JsonObject ll = new JsonObject();
+                    		ll.put("body",objectList);
+                    		ll.put("statusCode",200);
+                    		routingContext.response().putHeader("content-type", "application/json;charset=UTF-8")
+                    		.end(Json.encodePrettily(ll));
+                    	}
+                        
 
                     }
                 });

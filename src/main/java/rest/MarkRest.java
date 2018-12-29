@@ -3,14 +3,19 @@ package rest;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.json.Json;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.ext.sql.SQLConnection;
 import io.vertx.ext.web.RoutingContext;
 import org.apache.log4j.Logger;
+
+import tool.DButil;
 import tool.RedisUtil;
 
 public class MarkRest {
 
     private static final Logger logger = Logger.getLogger(MarkRest.class);
+    private static final String sql = "update app_user_inf set IM_MARK=? where UID=?";
     private Vertx vertx;
 
     public MarkRest(Vertx vertx) {
@@ -57,6 +62,12 @@ public class MarkRest {
                 logger.info("设置成功");
                 ll.put("statusCode", 200);
                 ll.put("body","昵称设置成功");
+                DButil.getJdbcClient().getConnection(handler->{
+                	SQLConnection connection = handler.result();
+                	connection.updateWithParams(sql, new JsonArray().add(mark).add(uid), resultHandler->{
+                		connection.close();
+                	});
+                });
 
             } else {
                 logger.error("设置昵称失败");

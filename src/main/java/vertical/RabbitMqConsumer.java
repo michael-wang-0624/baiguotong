@@ -21,9 +21,9 @@ public class RabbitMqConsumer extends AbstractVerticle {
 
     private Connection connection;
     private Channel channel = null;
-    private static final String exchangeName = "message-exchange_";
-    private static final String queueName = "message-queue_";
-    private static final String routingKey = "message-routing_";
+    private static final String exchangeName = "message-exchange_new";
+    private static final String queueName = "message-queue_new";
+    private static final String routingKey = "message-routing_new";
     private static final String updateLastMessage = "update im_message_last set `msg_id`=? ,`modify_time`=? ,`from` =? ,`to`=? where `mix_id`=?";
     private static final String insertLastMessage = "insert into im_message_last (`msg_id`,`from`,`to`,`mix_id`,`modify_time`) values (?,?,?,?,?)";
     private WorkerExecutor executor;

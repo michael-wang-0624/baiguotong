@@ -18,6 +18,7 @@ public class SignalVertical extends AbstractVerticle {
     public void start() throws Exception {
         //
         Signal signal = new Signal(appId);
+
         // 登录 Agora 信令系统
         //String token = SignalingToken.getToken(  "101");
         login(signal);

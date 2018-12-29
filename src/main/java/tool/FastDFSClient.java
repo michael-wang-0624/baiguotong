@@ -17,7 +17,7 @@ public class FastDFSClient {
 	        String configPath = FileUploadUtil.class.getClassLoader().getResource("fdfs_client.conf").getFile();
 			//FileUploadUtil.class.getClassLoader().getResourceAsStream("fdfs_client.conf");
 
-			ClientGlobal.init(configPath);
+			ClientGlobal.init("fdfs_client.conf");
 		} catch (Exception e) {
 			logger.error("FastDFS Client Init Fail!",e);
 		}

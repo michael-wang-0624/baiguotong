@@ -1,12 +1,20 @@
 package consumer;
 
 import io.vertx.core.AbstractVerticle;
+import io.vertx.core.CompositeFuture;
+import io.vertx.core.Future;
+import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.ext.sql.ResultSet;
 import io.vertx.ext.sql.SQLConnection;
 import io.vertx.ext.sql.UpdateResult;
 import model.BusMessage;
 import model.DataReqRepMessage;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import tool.DButil;
 import tool.RedisUtil;
@@ -54,17 +62,27 @@ public class FriendConsumer extends AbstractVerticle {
                                     if(re.succeeded()) {
                                         String nick = (String )re2.result().body();
                                         RedisUtil.redisClient_.get(uid+"_language", han->{
-                                            String sysLanguge=han.result();
-                                            JsonObject resultBody1 = new JsonObject().put("uid", uid)
-                                                    .put("username", nick)
-                                                    .put("sex", sex)
-                                                    .put("language", sysLanguge == null ? "" : sysLanguge)
-                                                    .put("addr", addr == null ? "" : addr);
-                                            rep.setCode(200);
-                                            rep.setObj(resultBody1);
-                                            message.setResRep(rep);
+                                        	String key = "headImage_"+uid;
+                                            RedisUtil.redisClient_.get(key, headHandler->{
+                                            	String headImage = headHandler.result();
+                                            	String sysLanguge=han.result();
+                                                JsonObject resultBody1 = new JsonObject().put("uid", uid)
+                                                        .put("username", nick)
+                                                        .put("sex", sex)
+                                                        .put("headImage", headImage ==null?"":headImage)
+                                                        .put("language", sysLanguge == null ? "" : sysLanguge)
+                                                        .put("addr", addr == null ? "" : addr);
+                                                rep.setCode(200);
+                                                rep.setObj(resultBody1);
+                                                message.setResRep(rep);
 
-                                            handler.reply(message);
+                                                handler.reply(message);
+                                            	
+                                              
+                                            });
+                                        	
+                                        	
+                                            
                                         });
 
 
@@ -86,48 +104,76 @@ public class FriendConsumer extends AbstractVerticle {
 
         vertx.eventBus().consumer("searchFriend", handler -> {
             JsonObject json = (JsonObject)handler.body();
-            String phoneNumber = json.getString("phoneNumber");
+            String keywords = json.getString("keywords");
             String name = json.getString("uid");
-            String sql = "select UID,TU_ACC,TU_SEX ,TU_SYSTEM_LAN,TU_ADDR from app_user_inf where TU_MOBILE= '"+ phoneNumber +"' AND TU_STATUS ='1' ";
+            String sql = "select UID,TU_ACC,TU_SEX ,TU_SYSTEM_LAN,TU_ADDR,TU_MOBILE,TU_EMAIL,IM_MARK from app_user_inf where "
+            		+ "(TU_MOBILE= '"+ keywords +"'  "
+            		+ "or IM_MARK= '"+ keywords +"' or TU_EMAIL= '"+ keywords +"') AND TU_STATUS ='1' ";
             DButil.getJdbcClient().getConnection(res ->{
                if(res.succeeded()) {
                    final SQLConnection connection = res.result();
-                    connection.querySingle(sql, re -> {
+                    connection.query(sql, re -> {
                         if(re.succeeded()) {
+                        	JsonArray jsonArray = new JsonArray();
                             DataReqRepMessage message = new DataReqRepMessage();
-                            JsonArray result = re.result();
-                            JsonObject resultBody = null;
+                            ResultSet resultSet = re.result();
                             BusMessage rep = new BusMessage();
-                            JsonArray jsonArray = new JsonArray();
-                            if (result == null) {
-                                resultBody = new JsonObject();
-                            } else {
-                                String uid = result.getString(0);
-                                if (uid.equals(name)){
-                                    resultBody = new JsonObject();
+                            List<JsonArray> results = resultSet.getResults();
+                            List<Future> futureList = new ArrayList<>();
+                            for(JsonArray result : results) {
+                            	String uid = result.getString(0);
+                            	if (uid.equals(name)){
+                                     continue;
                                 } else {
-                                    String username = result.getString(1);
-                                    String sex  = result.getString(2);
-                                    String sysLanguge = result.getString(3);
-                                    String addr = result.getString(4);
-                                    resultBody = new JsonObject().put("uid",uid)
-                                            .put("username",username)
-                                            .put("sex",sex)
-                                            .put("language",sysLanguge==null ?"":sysLanguge)
-                                            .put("addr",addr==null ?"":addr);
-                                    jsonArray.add(resultBody);
+                                	Future future = Future.future();
+                               	 	futureList.add(future);
+                                     //查头像和查语言/
+                                     String key = "headImage_"+uid;
+                                     RedisUtil.redisClient_.get(key, headHandler->{
+                                    	 if(headHandler.succeeded()) {
+                                    		 String headImage = headHandler.result();
+                                    		 //查语言
+                                    		 String lanuageKey =  uid+"_language";
+                                    		 RedisUtil.redisClient_.get(lanuageKey, lanHandler->{
+                                    			String language = lanHandler.result();
+                                    			String username = result.getString(1);
+                                                String sex  = result.getString(2);
+                                                String phoneNumber = result.getString(5);
+                                                String email = result.getString(6);
+                                                String nickName = result.getString(7);
+                                                
+                                                String addr = result.getString(4);
+                                                JsonObject resultBody = new JsonObject().put("uid",uid)
+                                                        .put("username",username)
+                                                        .put("sex",sex)
+                                                        .put("language",language==null ?"":language)
+                                                        .put("addr",addr==null ?"":addr)
+                                                        .put("phoneNumber",phoneNumber==null ?"":phoneNumber)
+                                                		.put("email",email==null ?"":email)
+                                                		.put("nick",nickName==null ?username:nickName)
+                                                		.put("headImage",headImage==null ?"":headImage)
+                                                        ;
+                                                jsonArray.add(resultBody);
+                                                future.complete();
+                                    		 });
+                                    		 
+                                    	 }
+                                    	 
+                                    	 
+                                     });
+                                    //);
+                                	
                                 }
-
                             }
-
-                            rep.setCode(200);
-
-
-
-                            rep.setObj(jsonArray);
-                            message.setResRep(rep);
-
-                            handler.reply(message);
+                            
+                            CompositeFuture.all(futureList).setHandler(rpv->{
+                                if(rpv.succeeded()){
+                                    rep.setCode(200);
+                                    rep.setObj(jsonArray);
+                                    message.setResRep(rep);
+                                    handler.reply(message);
+                                }
+                            });
                         }
                         connection.close();
                     });
