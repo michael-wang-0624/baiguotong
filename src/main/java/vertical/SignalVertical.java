@@ -27,7 +27,7 @@ public class SignalVertical extends AbstractVerticle {
     }
 
     public void login(Signal signal) {
-        signal.login("10", "_no_need_token", new Signal.LoginCallback() {
+        signal.login("1000", "_no_need_token", new Signal.LoginCallback() {
             MessageConsumer<Object> consumer = vertx.eventBus().consumer("subscribe");
 
             @Override

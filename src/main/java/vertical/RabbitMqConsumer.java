@@ -1,5 +1,6 @@
 package vertical;
 
+import com.clevercloud.rabbitmq.RabbitMQAutoConnection;
 import com.rabbitmq.client.*;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.WorkerExecutor;
@@ -15,6 +16,7 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.sql.Array;
+import java.util.ArrayList;
 
 
 public class RabbitMqConsumer extends AbstractVerticle {
@@ -32,18 +34,13 @@ public class RabbitMqConsumer extends AbstractVerticle {
     @Override
     public void start() throws Exception {
 
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("139.196.136.209");
-        factory.setPort(5672);
-        factory.setUsername("admin");
-        factory.setPassword("123456");
-        factory.setVirtualHost("/");
-        factory.setAutomaticRecoveryEnabled(true);
-        factory.setNetworkRecoveryInterval(5000);
+    	ArrayList<String> list = new ArrayList<String>();
+    	list.add("139.196.136.209");
         executor = vertx.createSharedWorkerExecutor("my-worker-pool");
 
         try {
-            connection = factory.newConnection();
+    	    connection = new RabbitMQAutoConnection(list,5672,"admin","123456","/");
+
             channel = connection.createChannel(20);
             channel.exchangeDeclare(exchangeName, "direct", true, false, null);
             channel.queueDeclare(queueName, true, false, false, null);

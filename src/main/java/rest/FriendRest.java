@@ -24,11 +24,56 @@ import java.util.List;
 public class FriendRest {
 
     private static final Logger logger = Logger.getLogger(FileRest.class);
-    private static final String  sql = "select UID from app_user_inf where TU_MOBILE = ? OR TU_ACC =? OR IM_MARK=?";  
+    private static final String  sql = "select UID from app_user_inf where TU_MOBILE = ? OR TU_ACC LIKE ? OR IM_MARK LIKE ?";  
     private Vertx vertx;
 
     public FriendRest(Vertx vertx) {
         this.vertx = vertx;
+    }
+    
+    public void getIsFriend(RoutingContext routeContext) {
+    	logger.info("getIsFriend");
+    	HttpServerRequest request = routeContext.request();
+        String uid = request.getParam("uid");
+        String friendUid = request.getParam("friendUid");
+        DButil.getJdbcClient().getConnection(handler->{
+        	 String userId1, userId2;
+              if (Long.valueOf(uid) < Long.valueOf(friendUid)) {
+                 userId1 = uid;
+                 userId2 = friendUid;
+    
+             } else {
+                 userId1 = friendUid;
+                 userId2 = uid;
+             }
+        	SQLConnection connection = handler.result();
+        
+        	connection.querySingleWithParams("select count(*) from im_friend where user_id1=? and user_id2 =? and status = 1 ",
+        			new JsonArray().add(userId1).add(userId2), resultHandler->{
+        				//int integer = jsonCount.getInteger(0);
+        				JsonArray array = resultHandler.result();
+        				JsonObject ll = new JsonObject();
+        				int integer = array.getInteger(0);
+        				if(integer==0) {
+        					ll.put("statusCode", 201);
+        					ll.put("body", "不是好友关系");
+        				} else {
+        					ll.put("statusCode", 200);
+        					ll.put("body", "是好友关系");
+        				}
+        		
+        				
+        				
+        				connection.close();
+                        routeContext.response().putHeader("content-type", "application/json;charset=UTF-8")
+                                    .end(Json.encodePrettily(ll));
+        		
+        		
+        	});
+        	
+        });
+        
+        
     }
 
     public void addFriend(RoutingContext routeContext) {
@@ -255,7 +300,7 @@ public class FriendRest {
                     		DButil.getJdbcClient().getConnection(handler->{
                     			SQLConnection fliterCon = handler.result();
                     			fliterCon.queryWithParams(sql, 
-                    					new JsonArray().add(keywords).add(keywords).add(keywords), 
+                    					new JsonArray().add(keywords).add("%"+keywords+"%").add("%"+keywords+"%"), 
                     						resultHandler->{
                     							ResultSet resultHandlerResult = resultHandler.result();
                     							List<JsonArray> uids = resultHandlerResult.getResults();

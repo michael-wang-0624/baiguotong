@@ -1,5 +1,8 @@
 package vertical;
 
+import java.util.ArrayList;
+
+import com.clevercloud.rabbitmq.RabbitMQAutoConnection;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -17,17 +20,18 @@ public class RabbiMqStart extends AbstractVerticle {
     @Override
     public void start() throws Exception {
 
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("139.196.136.209");
+        //ConnectionFactory factory = new ConnectionFactory();
+/*        factory.setHost("139.196.136.209");
         factory.setPort(5672);
         factory.setUsername("admin");
         factory.setPassword("123456");
         factory.setVirtualHost("/");
         factory.setAutomaticRecoveryEnabled(true);
-        factory.setNetworkRecoveryInterval(5000);
-
+        factory.setNetworkRecoveryInterval(5000);*/
+    	ArrayList<String> list = new ArrayList<String>();
+    	list.add("139.196.136.209");
+	    connection = new RabbitMQAutoConnection(list,5672,"admin","123456","/");
         try {
-            connection = factory.newConnection();
             channel = connection.createChannel(20);
             channel.exchangeDeclare(exchangeName, "direct", true,false,null);
             channel.queueDeclare(queueName, true, false, false, null);

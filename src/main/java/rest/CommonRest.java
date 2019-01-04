@@ -140,7 +140,7 @@ public class CommonRest {
                         	}) ;
                         } else {
                         	routingContext.response().putHeader("content-type", "application/json;charset=UTF-8")
-        					.end(Json.encodePrettily(new JsonObject().put("statusCode",201).put("body","没有数据")));
+        					.end(Json.encodePrettily(new JsonObject().put("statusCode",201).put("body",new JsonObject())));
                         }
                     }
                     connection.close();
