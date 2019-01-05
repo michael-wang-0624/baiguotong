@@ -110,21 +110,8 @@ public class RestApiVertical extends AbstractVerticle {
         router.route(HttpMethod.GET,"/getAddFriendList").handler(new FriendRest(vertx)::getAddFriendList);
 
         router.route(HttpMethod.GET,"/getMediaToken").handler(new CommonRest(vertx)::getMediaToken);
-        
-   /*     Route route = router.get("/talkList");
-
-        route.failureHandler(frc -> {
-     
-        	frc.response().putHeader("content-type", "application/json;charset=UTF-8")
-            .end(Json.encodePrettily(new JsonObject().put("statusCode",500).put("body","error")));
-        });*/
-        
-        vertx.exceptionHandler(new Handler<Throwable>() {  
-            @Override 
-            public void handle(Throwable event) { 
-              
-            }
-        });
+        router.route(HttpMethod.GET,"/getIsFriend").handler(new FriendRest(vertx)::getIsFriend);
+ 
 
         httpServer.requestHandler(router::accept).listen(8081);
 

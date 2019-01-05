@@ -1,9 +1,14 @@
 package consumer;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.CompositeFuture;
 import io.vertx.core.Future;
-import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.sql.ResultSet;
@@ -11,11 +16,6 @@ import io.vertx.ext.sql.SQLConnection;
 import io.vertx.ext.sql.UpdateResult;
 import model.BusMessage;
 import model.DataReqRepMessage;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.log4j.Logger;
 import tool.DButil;
 import tool.RedisUtil;
 
@@ -204,6 +204,8 @@ public class FriendConsumer extends AbstractVerticle {
 //统一
                    connection.update("update im_friend set `status` = "+status+" ,`modify_time`= "+currentTime+" where id = "+id,resultHandler ->{
                        if (resultHandler.succeeded()) {
+                    	   
+                    	   
                            handler.reply(200);
                            JsonArray jsonArray = new JsonArray();
                            jsonArray.add(status);
@@ -211,7 +213,29 @@ public class FriendConsumer extends AbstractVerticle {
                            DButil.getJdbcClient().getConnection(upConn ->{
                                SQLConnection sqlConnection = upConn.result();
                                sqlConnection.updateWithParams("update im_subscribe set `is_add`=? where f_id =?",jsonArray,update->{
-                                   sqlConnection.close();
+                                   /*msg.put("account",friendUid);
+                                   msg.put("message",new JsonObject().put("type","subscribe").put("uid",uid).put("id",id).put("body","请求添加好友"));
+                                   vertx.eventBus().send("subscribe", msg);*/
+                            	   if(status==1) {
+                            		   DButil.getJdbcClient().getConnection(query->{
+                                		   SQLConnection queryCon = query.result();
+                                		   logger.debug("select user_id1,user_id2 ,is_request from im_friend where id="+id);
+                                		   queryCon.querySingle("select user_id1,user_id2 ,is_request from im_friend where id="+id, queryHandler->{
+                                			   JsonArray result = queryHandler.result();
+                                			   boolean is_request = result.getBoolean(2);
+                                        	   JsonObject msg = new JsonObject();
+                                        	   String userId1 = result.getString(0);
+                                        	   String userId2 = result.getString(1);
+                                        	   msg.put("account", is_request?userId1:userId2);
+                                        	   msg.put("message", new JsonObject().put("type","receipt").put("uid",is_request?userId2:userId1).put("body","对方接受了你的请求"));
+                                        	   vertx.eventBus().send("subscribe", msg);
+                                        	   queryCon.close();
+                                		   });
+                                	   });
+                            	   }
+                            	  
+                            	   
+                            	   sqlConnection.close();
                                });
                            });
                        } else {
@@ -276,6 +300,30 @@ public class FriendConsumer extends AbstractVerticle {
                     connection.close();
                 });
 
+            });
+            
+            //delete message
+            DButil.getJdbcClient().getConnection(res->{
+            	
+            	Long lfrom = Long.valueOf(userId1);
+                Long lto = Long.valueOf(userId2);
+
+                BigDecimal v1 = new BigDecimal(lfrom).add(new BigDecimal(lto));
+                BigDecimal v2 = new BigDecimal(lfrom).add(new BigDecimal(lto + 1))
+                        .divide(new BigDecimal(2));
+                BigDecimal v3 = new BigDecimal(Math.min(lfrom, lto));
+                BigDecimal mixId = v1.multiply(v2).add(v3);
+            	String deleteSql = "delete from im_message where mix_id='"+mixId+"'";
+            	String deleteSql1 = "delete from im_message_last where  mix_id='"+mixId+"'";
+            	
+                SQLConnection connection = res.result();
+                connection.update(deleteSql, resultHandler->{
+                	connection.update(deleteSql1, resultHandler2->{
+                		connection.close();
+                	});
+                });
+                
+                
             });
 
 
