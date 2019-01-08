@@ -286,8 +286,26 @@ public class FriendRest {
                             RedisUtil.redisClient_.get(key, headHandler->{
                           	  String headImage = headHandler.result();
                           	  bodyJson.put("headImage", headImage==null?"":headImage);
-                          	  objectList.add(bodyJson);
-                              future.complete();
+                          	  DButil.getJdbcClient().getConnection(getNumberHan->{
+                                  SQLConnection numberHander = getNumberHan.result();
+                                  numberHander.querySingle("select TU_MOBILE from app_user_inf where UID='"+friendUid+"'",handler->{
+                                      JsonArray nuberarray = handler.result();
+                                      if (nuberarray!=null){
+                                          String phoneNum = nuberarray.getString(0);
+                                          if (phoneNum!=null) {
+                                              bodyJson.put("phoneNumber",phoneNum);
+                                          }
+                                          objectList.add(bodyJson);
+                                          future.complete();
+                                      }
+                                      numberHander.close();
+
+                                  });
+
+                              });
+
+
+
                             });
                             
                         }
@@ -297,7 +315,22 @@ public class FriendRest {
                 CompositeFuture.all(futureList).setHandler(rpv->{
                     if(rpv.succeeded()){
                     	if(keywords !=null) {
-                    		DButil.getJdbcClient().getConnection(handler->{
+                            Iterator<JsonObject> iterator =  objectList.iterator();
+                            while(iterator.hasNext()) {
+                                JsonObject json = iterator.next();
+                                if (!(json.getString("nick").contains(keywords) || keywords.equals(json.getString("phoneNumber"))) ) {
+                                    iterator.remove();
+                                }
+                            }
+
+                            JsonObject ll = new JsonObject();
+                            ll.put("body",objectList);
+                            ll.put("statusCode",200);
+                            routingContext.response().putHeader("content-type", "application/json;charset=UTF-8")
+                                    .end(Json.encodePrettily(ll));
+
+
+                    		/*DButil.getJdbcClient().getConnection(handler->{
                     			SQLConnection fliterCon = handler.result();
                     			fliterCon.queryWithParams(sql, 
                     					new JsonArray().add(keywords).add("%"+keywords+"%").add("%"+keywords+"%"), 
@@ -326,7 +359,7 @@ public class FriendRest {
                                                         .end(Json.encodePrettily(ll));
                     							fliterCon.close();
                     						});
-                    		});
+                    		});*/
                     		
                     	} else {
                     		

@@ -30,7 +30,9 @@ public class RedisUtil {
                     RedisOptions redisConfig = new RedisOptions()
                             //.setHost("120.78.218.117").setAuth("ckg-redis");
                             .setHost("139.196.136.209")
-                            .setAuth("123456");
+                            //.setReconnectAttempts(5)
+                            .setAuth("123456")
+                            ;
                     redisClient_ = RedisClient.create(vertx, redisConfig);
                 }
             }

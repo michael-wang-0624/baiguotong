@@ -393,7 +393,7 @@ public class CommonRest {
                 jsonArray.add(uid);
                 jsonArray.add(uid);
                 con.queryWithParams("select a.from,a.to ,a.msg_id  , a.modify_time,b.media,b.body,b.link from " +
-                        "im_message_last a join im_message  b on a.msg_id = b.id where a.from=? or a.to=? order by a.modify_time desc",jsonArray,re ->{
+                        "im_message_last a join im_message  b on a.msg_id = b.id where a.from=? or a.to=? ",jsonArray,re ->{
 
                     ResultSet resultSet = re.result();
                     List<JsonArray> results = resultSet.getResults();
@@ -419,7 +419,7 @@ public class CommonRest {
                         }
                         Future future = Future.future();
                         vertx.eventBus().send("getFriendUid",json,re2 ->{
-                            if(re.succeeded()) {
+                            if(re2.succeeded()) {
                                 String nick = (String )re2.result().body();
 
                                 int type ;
@@ -447,7 +447,7 @@ public class CommonRest {
                                             .put("media",media)
                                             .put("body",body)
                                             .put("link",link)
-                                            .put("headImage", headImage)
+                                            .put("headImage", headImage==null?"":headImage)
                                             .put("nick",nick).put("type",type);
                                     objectList.add(bodyJson);
                                     future.complete();
@@ -463,6 +463,7 @@ public class CommonRest {
                     CompositeFuture.all(futureList).setHandler(rpv->{
                         if(rpv.succeeded()){
                             JsonObject ll = new JsonObject();
+                            Collections.sort(objectList,new MessageLastComparator());
                             ll.put("body",objectList);
                             ll.put("statusCode",200);
                             futher.complete();
@@ -500,4 +501,13 @@ public class CommonRest {
 
         }
     }
+
+    private static class MessageLastComparator implements Comparator<JsonObject> {
+        @Override
+        public int compare(JsonObject o1, JsonObject o2) {
+            return o2.getLong("time").compareTo(o1.getLong("time"));
+        }
+    }
+
+
 }

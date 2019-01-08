@@ -108,7 +108,7 @@ public class FriendConsumer extends AbstractVerticle {
             String name = json.getString("uid");
             String sql = "select UID,TU_ACC,TU_SEX ,TU_SYSTEM_LAN,TU_ADDR,TU_MOBILE,TU_EMAIL,IM_MARK from app_user_inf where "
             		+ "(TU_MOBILE= '"+ keywords +"'  "
-            		+ "or IM_MARK= '"+ keywords +"' or TU_EMAIL= '"+ keywords +"') AND TU_STATUS ='1' ";
+            		+ "or IM_MARK like '%"+ keywords +"%' or TU_EMAIL= '"+ keywords +"' OR UID= '"+keywords+"') AND TU_STATUS ='1' ";
             DButil.getJdbcClient().getConnection(res ->{
                if(res.succeeded()) {
                    final SQLConnection connection = res.result();
