@@ -254,7 +254,7 @@ public class FriendConsumer extends AbstractVerticle {
 
              String uid = json.getString("uid");
             String friendUid = json.getString("friendUid");
-            String userId1, userId2;
+         /*   String userId1, userId2;
             final boolean is_request  ;
             if (Long.valueOf(uid) < Long.valueOf(friendUid)) {
                 userId1 = uid;
@@ -264,12 +264,14 @@ public class FriendConsumer extends AbstractVerticle {
                 userId1 = friendUid;
                 is_request = false;
                 userId2 = uid;
-            }
-            String sql = "delete from im_friend where user_id1 =   '" + userId1+"'";
+            }*/
+            String sql = "delete from im_friend where (user_id1 =   ? " +
+                    "and user_id2=  ? ) or (user_id1=? and user_id2=?) ";
             DButil.getJdbcClient().getConnection(res ->{
                 if(res.succeeded()) {
                     final SQLConnection connection = res.result();
-                    connection.querySingle(sql, re -> {
+                    JsonArray array = new JsonArray().add(uid).add(friendUid).add(friendUid).add(uid);
+                    connection.querySingleWithParams(sql, array,re -> {
                         if(re.succeeded()) {
                             DataReqRepMessage message = new DataReqRepMessage();
                             BusMessage rep = new BusMessage();
@@ -289,7 +291,7 @@ public class FriendConsumer extends AbstractVerticle {
             DButil.getJdbcClient().getConnection(res->{
                 SQLConnection connection = res.result();
                 String  updateSubsribe = "delete from  im_subscribe   where (`from`=? and  `to`=?) or " +
-                        "(`to`=? and `from`=?) ";
+                        "(`from`=? and `to`=?) ";
                 JsonArray jsonArray = new JsonArray();
                 jsonArray.add(uid)
                         .add(friendUid)
@@ -305,8 +307,8 @@ public class FriendConsumer extends AbstractVerticle {
             //delete message
             DButil.getJdbcClient().getConnection(res->{
             	
-            	Long lfrom = Long.valueOf(userId1);
-                Long lto = Long.valueOf(userId2);
+            	Long lfrom = Long.valueOf(uid);
+                Long lto = Long.valueOf(friendUid);
 
                 BigDecimal v1 = new BigDecimal(lfrom).add(new BigDecimal(lto));
                 BigDecimal v2 = new BigDecimal(lfrom).add(new BigDecimal(lto + 1))

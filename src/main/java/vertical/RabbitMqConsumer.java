@@ -98,7 +98,7 @@ public class RabbitMqConsumer extends AbstractVerticle {
                                                             .add(String.valueOf(to))
                                                             .add(jsonObject.getString("media", "text"))
                                                             .add(jsonObject.getString("body", ""))
-                                                            .add(jsonObject.getLong("send_time", System.currentTimeMillis() / 1000L))
+                                                            .add(jsonObject.getLong("send_time", System.currentTimeMillis() ))
                                                             .add(link != null ? link : "")
                                                             .add(String.valueOf(mixId))
                                                             .add(jsonObject.getInteger("voiceTime"));
@@ -198,7 +198,7 @@ public class RabbitMqConsumer extends AbstractVerticle {
                 SQLConnection con = res.result();
                 JsonArray array = new JsonArray()
                         .add(msgId)
-                        .add(System.currentTimeMillis() / 1000)
+                        .add(System.currentTimeMillis() )
                         .add(from)
                         .add(to)
                         .add(mixId);
@@ -223,7 +223,7 @@ public class RabbitMqConsumer extends AbstractVerticle {
                         .add(from)
                         .add(to)
                         .add(mixId)
-                        .add(System.currentTimeMillis() / 1000)
+                        .add(System.currentTimeMillis())
                         ;
                 //"insert into im_message_last (`msg_id`,`from`,`to`,`mix_id`,`modify_time`) values (?,?,?,?,?)
                 con.updateWithParams(insertLastMessage, array, handler -> {
