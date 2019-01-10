@@ -30,38 +30,45 @@ public class MarkConsumer extends AbstractVerticle {
                         //获取好友自己设置的昵称
                         String selfKey = "mark_" + friendUid;
                         RedisUtil.redisClient_.get(selfKey,selfHandler  -> {
-                            String selfSettingMark = selfHandler.result();
-                            if (selfSettingMark !=null) {
-                                re.reply(selfSettingMark);
-                            } else {
-                                //好友没有设置自己的昵称，获取mysql 中默认的用户名
-                                String sql = "select TU_ACC from app_user_inf where `UID` = '" + friendUid +"'";
-                                DButil.getJdbcClient().getConnection(res -> {
-                                    if (res.succeeded()) {
-                                        final SQLConnection connection = res.result();
-                                        connection.querySingle(sql, re1 -> {
+                            if (selfHandler.succeeded()) {
+
+                                String selfSettingMark = selfHandler.result();
+                                if (selfSettingMark !=null) {
+                                    re.reply(selfSettingMark);
+                                } else {
+                                    //好友没有设置自己的昵称，获取mysql 中默认的用户名
+                                    String sql = "select TU_ACC from app_user_inf where `UID` = '" + friendUid +"'";
+                                    DButil.getJdbcClient().getConnection(res -> {
+                                        if (res.succeeded()) {
+                                            final SQLConnection connection = res.result();
+                                            connection.querySingle(sql, re1 -> {
                                                 if (re1.succeeded()) {
-                                                JsonArray jsonArray = re1.result();
-                                                String defaultMark = jsonArray.getString(0);
+                                                    JsonArray jsonArray = re1.result();
+                                                    String defaultMark = jsonArray.getString(0);
 
-                                                //加到缓存中
-                                                re.reply(defaultMark);
-                                                RedisUtil.redisClient_.set(selfKey,defaultMark,re2 -> {
-                                                    if (re2.failed()) {
-                                                        logger.error("设置失败"+selfKey);
-                                                    }
-                                                });
+                                                    //加到缓存中
+                                                    re.reply(defaultMark);
+                                                    RedisUtil.redisClient_.set(selfKey,defaultMark,re2 -> {
+                                                        if (re2.failed()) {
+                                                            logger.error("设置失败"+selfKey);
+                                                        }
+                                                    });
 
-                                            }
-                                            connection.close();
+                                                }
+                                                connection.close();
 
-                                        });
-                                    }
-                                });
+                                            });
+                                        }
+                                    });
+                                }
+                            } else {
+                                logger.debug("error" + selfHandler.cause());
                             }
 
                         });
                     }
+                } else {
+                    logger.debug("error   " + handler.cause());
                 }
             });
         });

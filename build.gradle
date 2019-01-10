@@ -31,8 +31,6 @@ shadowJar {
 
     }
 
-
-
 }
 task "create-dirs" << {
     sourceSets*.java.srcDirs*.each {
