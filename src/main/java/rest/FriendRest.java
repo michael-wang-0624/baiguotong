@@ -173,7 +173,7 @@ public class FriendRest {
             SQLConnection connection = res.result();
             
             String sql = "SELECT a.* FROM im_subscribe a JOIN app_user_inf b ON a.`from` =b.UID WHERE "
-            		+ "a.`to` = '"+uid+"' AND a.`is_add` <> 1 ";
+            		+ "a.`to` = '"+uid+"' AND a.`is_add` = 0 ";
             
             if(keywords!=null) {
             	sql += apped;
@@ -391,6 +391,7 @@ public class FriendRest {
 
         String phoneNumber = request.getParam("uid");
         String uid = request.getParam("id");
+   
         vertx.eventBus().send("findFriendDetail",new JsonObject().put("id",phoneNumber).put("uid",uid),re ->{
             if(re.succeeded()) {
                 routeContext.response().setChunked(true);

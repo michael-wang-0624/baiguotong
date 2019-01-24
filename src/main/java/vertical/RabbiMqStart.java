@@ -9,6 +9,7 @@ import com.rabbitmq.client.ConnectionFactory;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonObject;
+import tool.Constant;
 
 public class RabbiMqStart extends AbstractVerticle {
     private Connection connection ;
@@ -19,18 +20,10 @@ public class RabbiMqStart extends AbstractVerticle {
 
     @Override
     public void start() throws Exception {
-
-        //ConnectionFactory factory = new ConnectionFactory();
-/*        factory.setHost("139.196.136.209");
-        factory.setPort(5672);
-        factory.setUsername("admin");
-        factory.setPassword("123456");
-        factory.setVirtualHost("/");
-        factory.setAutomaticRecoveryEnabled(true);
-        factory.setNetworkRecoveryInterval(5000);*/
+ 
     	ArrayList<String> list = new ArrayList<String>();
-    	list.add("139.196.136.209");
-	    connection = new RabbitMQAutoConnection(list,5672,"admin","123456","/");
+    	list.add(Constant.rabbit_host);
+	    connection = new RabbitMQAutoConnection(list,Constant.rabbit_port,Constant.username,Constant.password,"/");
         try {
             channel = connection.createChannel(20);
             channel.exchangeDeclare(exchangeName, "direct", true,false,null);

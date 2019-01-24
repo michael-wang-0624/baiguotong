@@ -34,6 +34,8 @@ public class DButil extends AbstractVerticle  {
  
     @Override
     public void start() throws Exception {
+        System.out.println(this.config());
+    	
     	DButil.init1(vertx,null);
         vertx.eventBus().consumer("queryWithParams",handler ->{
             vertx.executeBlocking(block ->{
@@ -107,29 +109,19 @@ public class DButil extends AbstractVerticle  {
 
 					// 读取配置加载JDBC所需配置信息
 					JsonObject mySQLClientConfig = new JsonObject()
-							//.put("url", "jdbc:mysql://42.159.245.82:7918/tdopm?useUnicode=true&characterEncoding=UTF8")
-							//.put("host","42.159.245.82")
-							.put("jdbcUrl", "jdbc:mysql://42.159.245.82:7918/tdopm?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true")
-							//.put("jdbcUrl", "jdbc:mysql://localhost:3306/tdopm?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true")
-							.put("username", "td_pay")
-							.put("password", "tdqazwsx_pay")
+							.put("jdbcUrl", Constant.jdbcUrl)
+							//.put("jdbcUrl",config.getString("jdbcUrl"))
+							.put("username", Constant.username)
+							.put("password", Constant.password)
 							 .put("driverClassName", "com.mysql.jdbc.Driver")
 							 .put("maxLifetime", 60000)
-							/* .put("idleTimeout", 60000)
-							 .put("connectionTimeout", 60000)
-							 .put("validationTimeout", 3000)
-							 .put("loginTimeout", 5)*/
 							 .put("idleTimeout", 30000)
 							 .put("connectionTimeout", 30000)
 							 .put("validationTimeout", 3000)
 							 //.put("connectionTestQuery","SELECT 1")
 							.put("provider_class", "io.vertx.ext.jdbc.spi.impl.HikariCPDataSourceProvider")
-                            .put("maximumPoolSize",15)
-                            //.put("minimumIdle", 1)
-                            //.put("minimumIdle", 5)
-                         /*   .put("username", "root")
-							.put("password", "fhj520")*/
-                            .put("port",7918);
+                            .put("maximumPoolSize",15);
+                           // .put("port",7918);
 		 
 					
 					client = JDBCClient.createShared(vertx,mySQLClientConfig);

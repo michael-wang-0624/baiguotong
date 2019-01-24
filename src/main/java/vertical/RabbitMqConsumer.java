@@ -9,6 +9,8 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.sql.SQLConnection;
 import io.vertx.ext.sql.UpdateResult;
 import org.apache.log4j.Logger;
+
+import tool.Constant;
 import tool.DButil;
 
 import java.io.IOException;
@@ -35,11 +37,11 @@ public class RabbitMqConsumer extends AbstractVerticle {
     public void start() throws Exception {
 
     	ArrayList<String> list = new ArrayList<String>();
-    	list.add("139.196.136.209");
+    	list.add(Constant.rabbit_host);
         executor = vertx.createSharedWorkerExecutor("my-worker-pool");
 
         try {
-    	    connection = new RabbitMQAutoConnection(list,5672,"admin","123456","/");
+    	    connection = new RabbitMQAutoConnection(list,Constant.rabbit_port,Constant.username,Constant.password,"/");
 
             channel = connection.createChannel(20);
             channel.exchangeDeclare(exchangeName, "direct", true, false, null);
@@ -225,6 +227,7 @@ public class RabbitMqConsumer extends AbstractVerticle {
                         .add(mixId)
                         .add(System.currentTimeMillis())
                         ;
+                logger.info(System.currentTimeMillis());
                 //"insert into im_message_last (`msg_id`,`from`,`to`,`mix_id`,`modify_time`) values (?,?,?,?,?)
                 con.updateWithParams(insertLastMessage, array, handler -> {
                     if (handler.failed()) {

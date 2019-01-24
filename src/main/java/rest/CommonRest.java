@@ -392,7 +392,7 @@ public class CommonRest {
                 JsonArray jsonArray = new JsonArray();
                 jsonArray.add(uid);
                 jsonArray.add(uid);
-                con.queryWithParams("select a.from,a.to ,a.msg_id  , a.modify_time,b.media,b.body,b.link from " +
+                con.queryWithParams("select a.from,a.to ,a.msg_id  , b.send_time,b.media,b.body,b.link from " +
                         "im_message_last a join im_message  b on a.msg_id = b.id where a.from=? or a.to=? ",jsonArray,re ->{
 
                     ResultSet resultSet = re.result();

@@ -373,6 +373,9 @@ public class FriendConsumer extends AbstractVerticle {
                                     message.setResRep(rep);
                                     handler.reply(message);
                                 } else if  (status ==2) {
+                                	//重新更新
+                                	
+                                	
                                     rep.setCode(200);
                                     rep.setObj(new JsonObject().put("body","已经发送好友请求").put("id",id)
                                     );

@@ -15,9 +15,12 @@ public class FastDFSClient {
 		try {
 			//String filePath = new ClassPathResource("fdfs_client.conf").getFile().getAbsolutePath();;
 	        String configPath = FileUploadUtil.class.getClassLoader().getResource("fdfs_client.conf").getFile();
-			//FileUploadUtil.class.getClassLoader().getResourceAsStream("fdfs_client.conf");
-
-			ClientGlobal.init("fdfs_client.conf");
+			if(Constant.isLocale) {
+ 				ClientGlobal.init(configPath);
+			} else {
+				ClientGlobal.init("fdfs_client.conf");
+			}
+	        //FileUploadUtil.class.getClassLoader().getResourceAsStream("fdfs_client.conf");
 		} catch (Exception e) {
 			logger.error("FastDFS Client Init Fail!",e);
 		}
