@@ -23,7 +23,7 @@ public class RabbiMqStart extends AbstractVerticle {
  
     	ArrayList<String> list = new ArrayList<String>();
     	list.add(Constant.rabbit_host);
-	    connection = new RabbitMQAutoConnection(list,Constant.rabbit_port,Constant.username,Constant.password,"/");
+	    connection = new RabbitMQAutoConnection(list,Constant.rabbit_port,Constant.rabbit_username,Constant.rabbit_password,"/");
         try {
             channel = connection.createChannel(20);
             channel.exchangeDeclare(exchangeName, "direct", true,false,null);

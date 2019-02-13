@@ -5,6 +5,9 @@ import io.agora.signal.Signal;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.eventbus.MessageConsumer;
 import io.vertx.core.json.JsonObject;
+
+import java.util.Random;
+
 import org.apache.log4j.Logger;
 import tool.SignalingToken;
 
@@ -27,7 +30,7 @@ public class SignalVertical extends AbstractVerticle {
     }
 
     public void login(Signal signal) {
-        signal.login("10", "_no_need_token", new Signal.LoginCallback() {
+        signal.login( String.valueOf(new Random().nextInt(100)), "_no_need_token", new Signal.LoginCallback() {
             MessageConsumer<Object> consumer = vertx.eventBus().consumer("subscribe");
 
             @Override

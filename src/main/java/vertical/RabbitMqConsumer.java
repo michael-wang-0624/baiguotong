@@ -41,7 +41,7 @@ public class RabbitMqConsumer extends AbstractVerticle {
         executor = vertx.createSharedWorkerExecutor("my-worker-pool");
 
         try {
-    	    connection = new RabbitMQAutoConnection(list,Constant.rabbit_port,Constant.username,Constant.password,"/");
+    	    connection = new RabbitMQAutoConnection(list,Constant.rabbit_port,Constant.rabbit_username,Constant.rabbit_password,"/");
 
             channel = connection.createChannel(20);
             channel.exchangeDeclare(exchangeName, "direct", true, false, null);
